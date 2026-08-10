@@ -81,7 +81,7 @@ function renderBillingList(){
   const pages=Math.max(1,Math.ceil(list.length/PAGE_SIZE));
   billingPageNumber=Math.min(billingPageNumber,pages);
   const start=(billingPageNumber-1)*PAGE_SIZE,items=list.slice(start,start+PAGE_SIZE);
-  $('billingList').innerHTML=list.length?`<div class="table-wrap"><table><thead><tr><th>Pedido</th><th>Item</th><th>Descrição</th><th>QTD</th><th>Superfrio</th><th>Estoque Meggs</th><th>Pendente</th><th>Data</th><th>Status</th><th>Ação</th></tr></thead><tbody>${items.map(o=>{
+  $('billingList').innerHTML=list.length?`<div class="table-wrap"><table><thead><tr><th>Pedido</th><th>Item</th><th>Descrição</th><th>QTD</th><th>Superfrio</th><th>Produção - Meggs</th><th>Pendente</th><th>Data</th><th>Status</th><th>Ação</th></tr></thead><tbody>${items.map(o=>{
     const sf=superfrioCount(o),stock=meggsStockCount(o),pending=pendingBoxCount(o);
     return `<tr class="${o.status==='falta_substituicao'?'row-missing':o.status==='parcial_aguardando_faturamento'?'row-partial':''}">
       <td><strong>${esc(o.order_number)}</strong></td>
@@ -94,7 +94,7 @@ function renderBillingList(){
       <td>${date(o.created_at)}</td>
       <td>${badge(o.status)}</td>
       <td>
-        ${o.status==='parcial_aguardando_faturamento'&&pending>0?`<button class="btn btn-success btn-small" onclick="completeWithMeggsStock('${o.id}')">Estoque Meggs (${pending})</button> `:''}
+        ${o.status==='parcial_aguardando_faturamento'&&pending>0?`<button class="btn btn-success btn-small" onclick="openProductionMeggs('${o.id}')">Lançar Produção - Meggs (${pending})</button> `:''}
         <button class="btn btn-outline btn-small" onclick="showDetails('${o.id}')">Ver</button>
       </td>
     </tr>`;
@@ -143,14 +143,14 @@ function detailsHtml(o){
   const warning=o.status==='falta_substituicao'
     ?'<div class="missing-warning">ATENÇÃO: FALTA - SUBSTITUIÇÃO DE ITEM. Este item não seguiu para fotos e precisa de tratativa do Faturamento.</div>'
     :o.status==='parcial_aguardando_faturamento'
-      ?`<div class="partial-warning">PROCESSAMENTO PARCIAL: a Superfrio processou <strong>${sf} de ${o.boxes_quantity}</strong> caixas. Restam <strong>${pending}</strong> caixa(s) para o Faturamento direcionar como Estoque Meggs.</div>`
+      ?`<div class="partial-warning">PROCESSAMENTO PARCIAL: a Superfrio processou <strong>${sf} de ${o.boxes_quantity}</strong> caixas. Restam <strong>${pending}</strong> caixa(s) para o Faturamento lançar como Produção - Meggs.</div>`
       :'';
   return`${warning}<div class="details">
     <div><span class="label">Pedido</span><strong>${esc(o.order_number)}</strong></div>
     <div><span class="label">Item</span><strong>${esc(o.item_number)}</strong></div>
     <div><span class="label">Caixas pedidas</span><strong>${o.boxes_quantity}</strong></div>
     <div><span class="label">Superfrio</span><strong>${sf}</strong></div>
-    <div><span class="label">Estoque Meggs</span><strong>${stock}</strong></div>
+    <div><span class="label">Produção - Meggs</span><strong>${stock}</strong></div>
     <div><span class="label">Pendentes</span><strong>${pending}</strong></div>
     <div><span class="label">Status</span><strong>${badge(o.status)}</strong></div>
     <div><span class="label">Peso Superfrio</span><strong>${weight(o.total_weight)}</strong></div>
@@ -228,13 +228,19 @@ async function markItemMissing(){
   await loadOrders();
 }
 async function saveWeights(){
+  const orderSnapshot=currentOrder;
+  if(!orderSnapshot)return;
+
   const available=Math.floor(Number($('availableBoxes')?.value||0));
-  if(!Number.isInteger(available)||available<1||available>currentOrder.boxes_quantity)
+  if(!Number.isInteger(available)||available<1||available>orderSnapshot.boxes_quantity)
     return alertBox($('globalAlert'),'Informe uma quantidade válida de caixas disponíveis.','error');
 
   const values=[...document.querySelectorAll('.weight-input')].map(i=>Number(i.value));
   if(values.length!==available||values.some(v=>!Number.isFinite(v)||v<=0))
     return alertBox($('globalAlert'),`Preencha os ${available} pesos corretamente.`,'error');
+
+  const btn=$('saveWeights');
+  if(btn){btn.disabled=true;btn.textContent='Salvando pesagem...'}
 
   const total=values.reduce((s,v)=>s+v,0);
   const weighedAt=new Date().toISOString();
@@ -243,31 +249,37 @@ async function saveWeights(){
     box_weights:values,
     total_weight:total,
     superfrio_boxes:available,
-    meggs_stock_boxes:0,
+    meggs_stock_boxes:Number(orderSnapshot.meggs_stock_boxes||0),
     status:'aguardando_fotos',
     weighed_by:profile.id,
     weighed_at:weighedAt,
     updated_at:weighedAt
-  }).eq('id',currentOrder.id).select('*').single();
+  }).eq('id',orderSnapshot.id).select('*').single();
 
-  if(error)return alertBox($('globalAlert'),error.message,'error');
+  if(error){
+    if(btn){btn.disabled=false;btn.textContent='Salvar pesagem'}
+    return alertBox($('globalAlert'),`Não foi possível salvar a pesagem: ${error.message}`,'error',9000);
+  }
 
+  // Atualiza a fila imediatamente. O e-mail não pode bloquear o fluxo operacional.
+  closeModal();
+  await loadOrders();
+
+  const partial=available<orderSnapshot.boxes_quantity;
   const emailResult=await notifyByEmail('weighing_completed',{
     ...weighedOrder,
     responsible_name:profile.name
   });
 
-  closeModal();
-  const partial=available<currentOrder.boxes_quantity;
+  const baseMessage=`Pesagem salva: ${available} de ${orderSnapshot.boxes_quantity} caixa(s) na Superfrio. Pedido liberado para fotos.`+
+    (partial?' Depois das fotos, a diferença seguirá para o Faturamento lançar como Produção - Meggs.':'');
+
   alertBox(
     $('globalAlert'),
-    emailResult.ok
-      ? `Pesagem salva: ${available} de ${currentOrder.boxes_quantity} caixa(s) na Superfrio. Agora aguardando fotos.${partial?' As demais serão direcionadas pelo Faturamento após as fotos.':''}`
-      : `Pesagem salva, mas o e-mail não pôde ser enviado: ${emailResult.error}`,
+    emailResult.ok?baseMessage:`${baseMessage} O e-mail não pôde ser enviado: ${emailResult.error}`,
     emailResult.ok?'success':'error',
-    9000
+    10000
   );
-  await loadOrders();
 }
 window.openPhotos=id=>{
   const o=allOrders.find(x=>x.id===id);if(!o)return;
@@ -279,7 +291,7 @@ window.openPhotos=id=>{
   $('modalContent').innerHTML=`${detailsHtml(o)}
     <div class="alert alert-info">
       Foram registradas <strong>${qty} caixa(s) disponíveis na Superfrio</strong>. Anexe uma foto da sacaria e uma da balança somente para essas caixas.
-      ${missing?` Depois das fotos, o Faturamento receberá o item como parcial e poderá direcionar as <strong>${missing} caixa(s) restantes</strong> para Estoque Meggs.`:''}
+      ${missing?` Depois das fotos, o Faturamento receberá o item como parcial e poderá lançar as <strong>${missing} caixa(s) restantes</strong> como Produção - Meggs.`:''}
     </div>
     <div class="photo-progress">
       <div><span class="label">Fotos da sacaria</span><strong id="sackProgress">0 de ${qty}</strong></div>
@@ -310,25 +322,34 @@ function updatePhotoProgress(){
 }
 async function uploadPhoto(file,box,kind){const ext=(file.name.split('.').pop()||'jpg').replace(/[^a-zA-Z0-9]/g,'').toLowerCase()||'jpg';const safeOrder=String(currentOrder.order_number).replace(/[^a-zA-Z0-9_-]/g,'_'),safeItem=String(currentOrder.item_number).replace(/[^a-zA-Z0-9_-]/g,'_');const path=`${safeOrder}/${safeItem}/caixa_${box}/${kind}_${Date.now()}_${crypto.randomUUID()}.${ext}`;const {error}=await sb.storage.from('pedido-fotos').upload(path,file,{upsert:false,contentType:file.type||'image/jpeg'});if(error)throw error;return path}
 async function savePhotos(){
-  const qty=superfrioCount(currentOrder);
+  const orderSnapshot=currentOrder;
+  if(!orderSnapshot)return;
+
+  const qty=superfrioCount(orderSnapshot);
   const expected=qty*2;
   if(Object.keys(photoFiles).length!==expected)
     return alertBox($('globalAlert'),`Faltam fotos. É necessário anexar ${expected} imagens para as ${qty} caixa(s) disponíveis.`, 'error');
 
-  const btn=$('savePhotos');btn.disabled=true;btn.textContent='Enviando fotos...';
+  const btn=$('savePhotos');
+  btn.disabled=true;
+  btn.textContent='Enviando fotos...';
+
   const uploaded=[];
+  let photoRowsInserted=false;
   try{
     for(let box=1;box<=qty;box++){
       for(const type of ['sacaria','balanca']){
         const path=await uploadPhoto(photoFiles[`${box}-${type}`],box,type);
-        uploaded.push({order_id:currentOrder.id,box_number:box,photo_type:type,storage_path:path,uploaded_by:profile.id});
+        uploaded.push({order_id:orderSnapshot.id,box_number:box,photo_type:type,storage_path:path,uploaded_by:profile.id});
       }
     }
+
     const {error:photoError}=await sb.from('order_photos').insert(uploaded);
     if(photoError)throw photoError;
+    photoRowsInserted=true;
 
     const now=new Date().toISOString();
-    const isPartial=qty<currentOrder.boxes_quantity;
+    const isPartial=qty<orderSnapshot.boxes_quantity;
     const nextStatus=isPartial?'parcial_aguardando_faturamento':'concluido';
 
     const {data:completedOrder,error}=await sb.from('orders').update({
@@ -337,8 +358,12 @@ async function savePhotos(){
       operation_completed_at:now,
       completed_at:isPartial?null:now,
       updated_at:now
-    }).eq('id',currentOrder.id).select('*').single();
+    }).eq('id',orderSnapshot.id).select('*').single();
     if(error)throw error;
+
+    // Atualiza a tela antes do aviso por e-mail.
+    closeModal();
+    await loadOrders();
 
     const emailType=isPartial?'partial_ready':'order_completed';
     const emailResult=await notifyByEmail(emailType,{
@@ -348,52 +373,102 @@ async function savePhotos(){
       responsible_name:profile.name
     });
 
-    closeModal();
-    const remaining=currentOrder.boxes_quantity-qty;
+    const remaining=orderSnapshot.boxes_quantity-qty;
     const okMessage=isPartial
-      ? `${expected} fotos salvas. Superfrio concluiu ${qty} de ${currentOrder.boxes_quantity} caixas. Faturamento deve direcionar as ${remaining} restantes para Estoque Meggs.`
+      ? `${expected} fotos salvas. Superfrio concluiu ${qty} de ${orderSnapshot.boxes_quantity} caixa(s). O Faturamento deve lançar as ${remaining} caixa(s) restantes como Produção - Meggs.`
       : `${expected} fotos salvas. Pedido concluído e Faturamento avisado por e-mail.`;
+
     alertBox(
       $('globalAlert'),
       emailResult.ok?okMessage:`${okMessage} O e-mail não pôde ser enviado: ${emailResult.error}`,
       emailResult.ok?'success':'error',
       10000
     );
-    await loadOrders();
   }catch(e){
-    if(uploaded.length)await sb.storage.from('pedido-fotos').remove(uploaded.map(x=>x.storage_path)).catch(()=>{});
-    alertBox($('globalAlert'),e.message,'error');
-    btn.disabled=false;
-    btn.textContent='Tentar novamente';
+    // Se falhou depois de inserir as linhas, remove as referências e os arquivos para permitir nova tentativa limpa.
+    if(photoRowsInserted){
+      try{await sb.from('order_photos').delete().eq('order_id',orderSnapshot.id).in('storage_path',uploaded.map(x=>x.storage_path))}catch(_){}
+    }
+    if(uploaded.length){
+      try{await sb.storage.from('pedido-fotos').remove(uploaded.map(x=>x.storage_path))}catch(_){}
+    }
+    alertBox($('globalAlert'),`Não foi possível concluir as fotos: ${e.message}`,'error',10000);
+    if(btn){btn.disabled=false;btn.textContent='Tentar novamente'}
   }
 }
-window.completeWithMeggsStock=async id=>{
+
+window.openProductionMeggs=id=>{
   if(!['admin','faturamento'].includes(profile.role))return;
   const o=allOrders.find(x=>x.id===id);if(!o)return;
-  const sf=superfrioCount(o),remaining=Math.max(0,o.boxes_quantity-sf);
-  if(o.status!=='parcial_aguardando_faturamento'||remaining<=0)return;
-  const confirmed=confirm(
-    `Pedido ${o.order_number} — Item ${o.item_number}\n\n`+
-    `Caixas pedidas: ${o.boxes_quantity}\n`+
-    `Processadas na Superfrio: ${sf}\n`+
-    `Completar com Estoque Meggs: ${remaining}\n\n`+
-    `Confirmar o direcionamento das ${remaining} caixa(s) restantes para ESTOQUE MEGGS?`
-  );
-  if(!confirmed)return;
-  const now=new Date().toISOString();
-  const {error}=await sb.from('orders').update({
-    meggs_stock_boxes:remaining,
-    status:'concluido',
-    stock_completed_by:profile.id,
-    stock_completed_at:now,
-    completed_at:now,
-    updated_at:now
-  }).eq('id',o.id);
-  if(error)return alertBox($('globalAlert'),error.message,'error');
-  alertBox($('globalAlert'),`Pedido concluído: ${sf} caixa(s) Superfrio + ${remaining} caixa(s) Estoque Meggs = ${o.boxes_quantity} caixa(s).`,'success',9000);
-  await loadOrders();
+  const sf=superfrioCount(o),production=meggsStockCount(o),pending=pendingBoxCount(o);
+  if(o.status!=='parcial_aguardando_faturamento'||pending<=0)return;
+
+  currentOrder=o;
+  $('modalTitle').textContent=`Produção - Meggs — Pedido ${o.order_number}, Item ${o.item_number}`;
+  $('modalContent').innerHTML=`${detailsHtml(o)}
+    <div class="alert alert-info">
+      A Superfrio processou <strong>${sf}</strong> caixa(s). Informe abaixo quantas das <strong>${pending}</strong> caixa(s) pendentes saíram da <strong>Produção - Meggs</strong>.
+    </div>
+    <div class="form-group">
+      <label>Quantidade saída da Produção - Meggs</label>
+      <input id="productionMeggsQty" class="control" type="number" min="1" max="${pending}" value="${pending}">
+      <small style="display:block;margin-top:6px;color:var(--muted)">Máximo permitido agora: ${pending} caixa(s).</small>
+    </div>
+    <div class="form-group">
+      <label>Observação (opcional)</label>
+      <textarea id="productionMeggsNote" class="control" placeholder="Ex.: separado na produção para complementar o pedido"></textarea>
+    </div>
+    <button id="saveProductionMeggs" class="btn btn-success btn-block" type="button">Salvar Produção - Meggs</button>`;
+  $('saveProductionMeggs').onclick=saveProductionMeggs;
+  openModal();
 };
 
+async function saveProductionMeggs(){
+  const orderSnapshot=currentOrder;
+  if(!orderSnapshot)return;
+
+  const sf=superfrioCount(orderSnapshot);
+  const currentProduction=meggsStockCount(orderSnapshot);
+  const pending=Math.max(0,orderSnapshot.boxes_quantity-sf-currentProduction);
+  const qty=Math.floor(Number($('productionMeggsQty')?.value||0));
+
+  if(!Number.isInteger(qty)||qty<1||qty>pending)
+    return alertBox($('globalAlert'),`Informe uma quantidade entre 1 e ${pending}.`,'error');
+
+  const note=$('productionMeggsNote')?.value.trim()||'';
+  const newProduction=currentProduction+qty;
+  const remaining=Math.max(0,orderSnapshot.boxes_quantity-sf-newProduction);
+  const now=new Date().toISOString();
+  const finalStatus=remaining===0?'concluido':'parcial_aguardando_faturamento';
+
+  const originalObservation=String(orderSnapshot.observation||'').trim();
+  const productionLine=`Produção - Meggs: +${qty} caixa(s) em ${new Intl.DateTimeFormat('pt-BR',{dateStyle:'short',timeStyle:'short'}).format(new Date())}${note?` — ${note}`:''}`;
+  const newObservation=[originalObservation,productionLine].filter(Boolean).join('\n');
+
+  const {error}=await sb.from('orders').update({
+    meggs_stock_boxes:newProduction,
+    status:finalStatus,
+    stock_completed_by:profile.id,
+    stock_completed_at:now,
+    completed_at:remaining===0?now:null,
+    observation:newObservation,
+    updated_at:now
+  }).eq('id',orderSnapshot.id);
+
+  if(error)return alertBox($('globalAlert'),`Não foi possível salvar Produção - Meggs: ${error.message}`,'error',9000);
+
+  closeModal();
+  await loadOrders();
+
+  alertBox(
+    $('globalAlert'),
+    remaining===0
+      ? `Pedido concluído: ${sf} caixa(s) Superfrio + ${newProduction} caixa(s) Produção - Meggs = ${orderSnapshot.boxes_quantity} caixa(s).`
+      : `Produção - Meggs registrada: +${qty} caixa(s). Ainda restam ${remaining} caixa(s) pendentes.`,
+    'success',
+    10000
+  );
+}
 async function signedUrl(path){if(!path)return null;const {data,error}=await sb.storage.from('pedido-fotos').createSignedUrl(path,3600);if(error)throw error;return data.signedUrl}
 window.showDetails=async id=>{const o=allOrders.find(x=>x.id===id);if(!o)return;$('modalTitle').textContent=`Pedido ${o.order_number} — Item ${o.item_number}`;$('modalContent').innerHTML='<div class="spinner"></div>';openModal();try{const {data:photos,error:photoError}=await sb.from('order_photos').select('id,box_number,photo_type,storage_path,created_at').eq('order_id',o.id).order('box_number',{ascending:true});if(photoError)throw photoError;let photoHtml='';if(photos?.length){const withUrls=await Promise.all(photos.map(async p=>({...p,url:await signedUrl(p.storage_path)})));photoHtml=Array.from({length:superfrioCount(o)},(_,i)=>{const box=i+1,sack=withUrls.find(p=>p.box_number===box&&p.photo_type==='sacaria'),scale=withUrls.find(p=>p.box_number===box&&p.photo_type==='balanca');if(!sack&&!scale)return '';return `<section class="box-images"><h4>Caixa ${box}</h4><div class="image-grid">${sack?`<div class="image-card"><h4>Foto da sacaria</h4><img src="${sack.url}"><a class="btn btn-outline btn-small" href="${sack.url}" target="_blank" rel="noopener">Abrir imagem</a></div>`:''}${scale?`<div class="image-card"><h4>Foto da balança</h4><img src="${scale.url}"><a class="btn btn-outline btn-small" href="${scale.url}" target="_blank" rel="noopener">Abrir imagem</a></div>`:''}</div></section>`}).join('')}else{const [sack,scale]=await Promise.all([signedUrl(o.sack_image_path),signedUrl(o.scale_image_path)]);photoHtml=sack||scale?`<div class="image-grid">${sack?`<div class="image-card"><h4>Foto da sacaria (registro antigo)</h4><img src="${sack}"><a class="btn btn-outline btn-small" href="${sack}" target="_blank" rel="noopener">Abrir imagem</a></div>`:''}${scale?`<div class="image-card"><h4>Foto da balança (registro antigo)</h4><img src="${scale}"><a class="btn btn-outline btn-small" href="${scale}" target="_blank" rel="noopener">Abrir imagem</a></div>`:''}</div>`:'<div class="alert alert-info">As fotos ainda não foram anexadas.</div>'}$('modalContent').innerHTML=`${detailsHtml(o)}${o.box_weights?.length?`<ul class="weight-list">${o.box_weights.map((v,i)=>`<li><strong>Caixa ${i+1}</strong><br>${weight(v)}</li>`).join('')}</ul>`:''}${photoHtml}`}catch(e){$('modalContent').innerHTML=`<div class="alert alert-error">${esc(e.message)}</div>`}};
 function header(v){return String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().toUpperCase()}$('xlsxInput').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const wb=XLSX.read(new Uint8Array(ev.target.result),{type:'array'}),ws=wb.Sheets[wb.SheetNames[0]],rows=XLSX.utils.sheet_to_json(ws,{header:1,defval:'',raw:false});processImport(rows,f.name)}catch(err){alertBox($('globalAlert'),'Não foi possível ler a planilha.','error')}};r.readAsArrayBuffer(f)};function processImport(rows,file){const hi=rows.findIndex(r=>r.map(header).includes('COD PEDIDO')&&r.map(header).includes('CODIGO'));if(hi<0)return alertBox($('globalAlert'),'Não encontrei COD PEDIDO e CODIGO.','error');const hs=rows[hi].map(header),idx=n=>hs.indexOf(n),c={order:idx('COD PEDIDO'),item:idx('CODIGO'),desc:idx('DESCRICAO'),qty:idx('QTD'),unit:idx('UN')};if(Object.values(c).some(v=>v<0))return alertBox($('globalAlert'),'A planilha precisa ter COD PEDIDO, CODIGO, DESCRICAO, QTD e UN.','error');const existing=new Set(allOrders.map(o=>`${o.order_number}__${o.item_number}`)),seen=new Set();importRows=rows.slice(hi+1).map((r,i)=>{const order=String(r[c.order]||'').replace(/\D/g,''),item=String(r[c.item]||'').replace(/\D/g,''),description=String(r[c.desc]||'').trim(),qty=Number(String(r[c.qty]||'').replace(',','.')),unit=String(r[c.unit]||'').trim().toUpperCase();if(!order&&!item&&!description&&!qty&&!unit)return null;const key=`${order}__${item}`,errors=[];if(!order)errors.push('Pedido inválido');if(!item)errors.push('Item inválido');if(!description)errors.push('Descrição vazia');if(!Number.isInteger(qty)||qty<1)errors.push('QTD inválida');if(!unit)errors.push('UN vazia');const duplicate=existing.has(key)||seen.has(key);seen.add(key);return{line:hi+i+2,order,item,description,qty,unit,errors,duplicate,selected:!errors.length&&!duplicate}}).filter(Boolean);showImportPreview(file)}function showImportPreview(file){const ready=importRows.filter(r=>r.selected).length;$('modalTitle').textContent='Prévia da importação';$('modalContent').innerHTML=`<div class="alert alert-info"><strong>${esc(file)}</strong></div><div class="table-wrap"><table><thead><tr><th>Importar</th><th>Linha</th><th>Pedido</th><th>Item</th><th>Descrição</th><th>QTD</th><th>UN</th><th>Situação</th></tr></thead><tbody>${importRows.map((r,i)=>`<tr><td><input class="importCheck" data-i="${i}" type="checkbox" ${r.selected?'checked':''} ${r.errors.length||r.duplicate?'disabled':''}></td><td>${r.line}</td><td>${esc(r.order)}</td><td>${esc(r.item)}</td><td class="description">${esc(r.description)}</td><td>${r.qty||'—'}</td><td>${esc(r.unit)}</td><td>${r.errors.length?esc(r.errors.join(', ')):r.duplicate?'Duplicado':'Pronto'}</td></tr>`).join('')}</tbody></table></div><div class="modal-footer"><button class="btn btn-muted" onclick="closeModal()">Cancelar</button><button id="confirmImport" class="btn btn-success" ${ready?'':'disabled'}>Importar pedidos</button></div>`;document.querySelectorAll('.importCheck').forEach(c=>c.onchange=e=>importRows[+e.target.dataset.i].selected=e.target.checked);$('confirmImport').onclick=confirmImport;openModal()}async function confirmImport(){const selected=importRows.filter(r=>r.selected).map(r=>({order_number:r.order,item_number:r.item,description:r.description,boxes_quantity:r.qty,unit:r.unit,status:'aguardando_pesagem',created_by:profile.id}));if(!selected.length)return;const {data,error}=await sb.from('orders').insert(selected).select('*');if(error)return alertBox($('globalAlert'),error.message,'error');const emailResult=await notifyByEmail('import_summary',data||selected);closeModal();$('xlsxInput').value='';alertBox($('globalAlert'),emailResult.ok?`${selected.length} pedido(s) importado(s) e equipe operacional avisada por e-mail.`:`${selected.length} pedido(s) importado(s), mas o e-mail não pôde ser enviado: ${emailResult.error}`,emailResult.ok?'success':'error',8000);await loadOrders()}
