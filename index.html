@@ -8,7 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <style>
 :root{--red:#e3062f;--green:#188754;--blue:#1267d6;--bg:#f4f6f9;--white:#fff;--text:#202632;--muted:#687180;--border:#dce1e7;--shadow:0 10px 28px rgba(16,24,40,.08)}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}button,input,select,textarea{font:inherit}.hidden{display:none!important}.container{width:min(1220px,calc(100% - 28px));margin:24px auto}.header{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--border);min-height:70px;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:15px}.brand,.user{display:flex;align-items:center;gap:11px}.logo{width:44px;height:44px;border-radius:13px;background:var(--red);color:#fff;display:grid;place-items:center;font-size:22px;font-weight:900}.brand h1{font-size:19px;margin:0}.brand p,.user small{margin:3px 0 0;color:var(--muted);font-size:12px}.user-text{text-align:right}.user-text strong{display:block}.login-page{min-height:100vh;padding:20px;display:grid;place-items:center;background:radial-gradient(circle at top left,rgba(227,6,47,.14),transparent 36%),var(--bg)}.login-card{width:min(460px,100%);background:#fff;padding:30px;border-radius:20px;box-shadow:var(--shadow)}.login-card h1{margin:15px 0 7px}.login-card>p{color:var(--muted);line-height:1.5;margin:0 0 22px}.form-group{margin-bottom:16px}.form-group label{display:block;font-size:13px;font-weight:800;margin-bottom:7px}.control{width:100%;min-height:44px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:#fff;outline:none}.control:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(227,6,47,.1)}textarea.control{min-height:86px;resize:vertical}.btn{min-height:41px;padding:9px 15px;border:0;border-radius:10px;font-weight:800;cursor:pointer}.btn:disabled{opacity:.5;cursor:not-allowed}.btn-primary{background:var(--red);color:#fff}.btn-success{background:var(--green);color:#fff}.btn-outline{background:#fff;color:var(--text);border:1px solid var(--border)}.btn-muted{background:#edf0f4;color:var(--text)}.btn-danger{background:#ffe0e5;color:#9d1930}.btn-block{width:100%}.btn-small{min-height:34px;padding:6px 10px;font-size:12px}.page-title{margin-bottom:21px}.page-title h2{margin:0 0 5px;font-size:25px}.page-title p{margin:0;color:var(--muted)}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}.stat,.card{background:#fff;border-radius:15px;box-shadow:var(--shadow)}.stat{padding:18px}.stat span{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;font-weight:800}.stat strong{display:block;font-size:29px;margin-top:7px}.card{padding:20px}.card+.card{margin-top:20px}.card-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:14px;margin-bottom:17px;border-bottom:1px solid var(--border)}.card-head h3{font-size:17px;margin:0}.card-head p{font-size:12px;color:var(--muted);margin:4px 0 0}.grid-two{display:grid;grid-template-columns:1fr 1.35fr;gap:20px}.alert{padding:12px 14px;border-radius:10px;margin-bottom:15px;line-height:1.45}.alert-success{background:#daf3e5;color:#0d6437}.alert-error{background:#ffe0e5;color:#9d1930}.alert-info{background:#e1edff;color:#174f96}.badge{display:inline-flex;align-items:center;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:900}.badge-weight{background:#fff1c8;color:#745600}.badge-photo{background:#deebff;color:#17519a}.badge-done{background:#d9f3e5;color:#0b6436}.badge-missing{background:#ffe0e5;color:#9d1930;border:1px solid #f4b8c3}.badge-partial{background:#fff0cf;color:#7b5300;border:1px solid #f0d797}.row-partial{background:#fffaf0}.row-partial td:first-child{border-left:4px solid #d99a00}.partial-warning{margin:14px 0;padding:14px;border-radius:11px;background:#fff8e8;color:#755300;border:1px solid #efd99c;font-weight:700;line-height:1.45}.badge-postponed{background:#efe7ff;color:#5d3597;border:1px solid #d8c3f6}.badge-overdue{background:#ffe0e5;color:#9d1930;border:1px solid #f4b8c3}.row-postponed{background:#fbf8ff}.row-postponed td:first-child{border-left:4px solid #8057b3}.queue-card.postponed{border:2px solid #aa87d4;background:#fcfaff}.postponed-warning{margin:14px 0;padding:14px;border-radius:11px;background:#f6f0ff;color:#583783;border:1px solid #d9c6f2;font-weight:700;line-height:1.5}.overdue-warning{background:#fff0f2;color:#8f1730;border-color:#f2bcc6}.row-missing{background:#fff6f7}.row-missing td:first-child{border-left:4px solid #e3062f}.queue-card.missing{border:2px solid #e3062f;background:#fff7f8}.missing-warning{margin:14px 0;padding:14px;border-radius:11px;background:#fff0f2;color:#8f1730;border:1px solid #f2bcc6;font-weight:700;line-height:1.45}.badge-admin{background:#eee5ff;color:#6133a5}.badge-active{background:#d9f3e5;color:#0b6436}.badge-inactive{background:#eceff3;color:#5e6672}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse}th,td{padding:11px 9px;border-bottom:1px solid var(--border);text-align:left;white-space:nowrap;font-size:13px}th{font-size:11px;color:var(--muted);text-transform:uppercase}.description{white-space:normal;min-width:250px;line-height:1.35}.search-row{display:grid;grid-template-columns:2fr 1fr;gap:10px}.filter-row{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:10px;align-items:end}.filter-field label{display:block;font-size:11px;font-weight:800;color:var(--muted);margin:0 0 6px;text-transform:uppercase}.clear-filter{white-space:nowrap}.queue{display:grid;gap:13px;margin-top:18px}.queue-card{border:1px solid var(--border);border-radius:13px;padding:16px}.queue-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.queue-head h3{margin:0;font-size:18px}.queue-head p{margin:4px 0 0;color:var(--muted);font-size:13px}.queue-info,.details{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.queue-info>div,.details>div{background:#f6f8fa;border-radius:9px;padding:10px}.label{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;font-weight:800;margin-bottom:4px}.queue-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}.empty{text-align:center;padding:30px;color:var(--muted)}.import-layout{display:flex;align-items:center;justify-content:space-between;gap:18px}.import-about{display:flex;gap:13px;align-items:center}.xls-icon{width:56px;height:56px;border-radius:14px;background:#daf3e5;color:#0b6436;display:grid;place-items:center;font-weight:900}.import-about p{margin:4px 0 0;color:var(--muted);font-size:12px;line-height:1.45}.file-input{position:absolute;opacity:0;width:1px;height:1px;overflow:hidden}.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:15px 0}.summary div{border:1px solid var(--border);border-radius:10px;padding:11px}.summary span{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;font-weight:800}.summary strong{font-size:21px;display:block;margin-top:4px}.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.58);padding:18px;display:grid;place-items:center;z-index:100}.modal{width:min(1000px,100%);max-height:calc(100vh - 36px);overflow:auto;background:#fff;border-radius:18px;padding:21px}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:17px}.modal-head h3{margin:0}.weights{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin:14px 0}.weight-box{border:1px solid var(--border);background:#fafbfc;border-radius:11px;padding:12px}.weight-box label{display:block;font-weight:800;font-size:12px;margin-bottom:7px}.total{display:flex;justify-content:space-between;align-items:center;background:#edf1f5;border-radius:11px;padding:14px;margin:13px 0 17px}.total strong{font-size:22px}.upload-grid,.image-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.photo-progress{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}.photo-progress>div{padding:12px;border-radius:10px;background:#f2f4f7}.photo-progress strong{display:block;font-size:18px;margin-top:3px}.box-photo-card{border:1px solid var(--border);border-radius:14px;padding:15px;margin-top:13px;background:#fff}.box-photo-card>h4{margin:0 0 12px;font-size:16px}.photo-pair{display:grid;grid-template-columns:1fr 1fr;gap:13px}.photo-slot{border:2px dashed var(--border);border-radius:12px;padding:12px;background:#fbfcfd}.photo-slot.complete{border-color:#4fad7a;background:#f4fbf7}.photo-slot h5{margin:0 0 4px}.photo-slot p{margin:0 0 10px;color:var(--muted);font-size:12px}.photo-buttons{display:grid;grid-template-columns:1fr 1fr;gap:7px}.photo-button{display:flex;align-items:center;justify-content:center;min-height:39px;border-radius:9px;padding:8px;font-size:12px;font-weight:800;cursor:pointer;text-align:center}.photo-camera{background:var(--text);color:#fff}.photo-gallery{background:#fff;color:var(--text);border:1px solid var(--border)}.photo-preview-wrap{position:relative;margin-top:10px}.preview{display:none;width:100%;height:190px;object-fit:contain;background:#edf0f3;border-radius:10px}.preview.visible{display:block}.remove-photo{display:none;position:absolute;right:7px;top:7px;border:0;border-radius:999px;background:rgba(157,25,48,.9);color:#fff;width:31px;height:31px;font-weight:900;cursor:pointer}.photo-preview-wrap.has-photo .remove-photo{display:block}.image-card{border:1px solid var(--border);border-radius:12px;padding:12px}.image-card h4{margin:0 0 9px}.image-card img{width:100%;max-height:420px;object-fit:contain;background:#edf0f3;border-radius:9px}.box-images{border:1px solid var(--border);border-radius:13px;padding:13px;margin-top:13px}.box-images h4{margin:0 0 10px}.weight-list{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;padding:0;list-style:none}.weight-list li{background:#f2f4f6;border-radius:9px;padding:10px}.modal-footer{display:flex;justify-content:flex-end;gap:9px;margin-top:16px}.admin-grid{display:grid;grid-template-columns:.9fr 1.5fr;gap:20px}.account-list{display:grid;gap:12px}.account-card{border:1px solid var(--border);border-radius:12px;padding:15px;display:flex;justify-content:space-between;align-items:center;gap:14px}.account-card.inactive{opacity:.62;background:#f6f7f9}.account-main strong{display:block;font-size:15px}.account-main span{display:block;color:var(--muted);font-size:12px;margin-top:4px}.account-actions{display:flex;gap:7px;flex-wrap:wrap}.pagination{margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.pagination-info{color:var(--muted);font-size:13px}.pagination-buttons{display:flex;align-items:center;gap:7px;flex-wrap:wrap}.page-button{min-width:38px;height:38px;padding:0 11px;border:1px solid var(--border);border-radius:9px;background:#fff;color:var(--text);font-weight:700;cursor:pointer}.page-button.active{background:var(--red);border-color:var(--red);color:#fff}.spinner{width:22px;height:22px;border:3px solid #ddd;border-top-color:var(--red);border-radius:50%;animation:spin .8s linear infinite;margin:auto}@keyframes spin{to{transform:rotate(360deg)}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}button,input,select,textarea{font:inherit}.hidden{display:none!important}.container{width:min(1220px,calc(100% - 28px));margin:24px auto}.header{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--border);min-height:70px;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:15px}.brand,.user{display:flex;align-items:center;gap:11px}.logo{width:44px;height:44px;border-radius:13px;background:var(--red);color:#fff;display:grid;place-items:center;font-size:22px;font-weight:900}.brand h1{font-size:19px;margin:0}.brand p,.user small{margin:3px 0 0;color:var(--muted);font-size:12px}.user-text{text-align:right}.user-text strong{display:block}.login-page{min-height:100vh;padding:20px;display:grid;place-items:center;background:radial-gradient(circle at top left,rgba(227,6,47,.14),transparent 36%),var(--bg)}.login-card{width:min(460px,100%);background:#fff;padding:30px;border-radius:20px;box-shadow:var(--shadow)}.login-card h1{margin:15px 0 7px}.login-card>p{color:var(--muted);line-height:1.5;margin:0 0 22px}.form-group{margin-bottom:16px}.form-group label{display:block;font-size:13px;font-weight:800;margin-bottom:7px}.control{width:100%;min-height:44px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:#fff;outline:none}.control:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(227,6,47,.1)}textarea.control{min-height:86px;resize:vertical}.btn{min-height:41px;padding:9px 15px;border:0;border-radius:10px;font-weight:800;cursor:pointer}.btn:disabled{opacity:.5;cursor:not-allowed}.btn-primary{background:var(--red);color:#fff}.btn-success{background:var(--green);color:#fff}.btn-outline{background:#fff;color:var(--text);border:1px solid var(--border)}.btn-muted{background:#edf0f4;color:var(--text)}.btn-danger{background:#ffe0e5;color:#9d1930}.btn-block{width:100%}.btn-small{min-height:34px;padding:6px 10px;font-size:12px}.page-title{margin-bottom:21px}.page-title h2{margin:0 0 5px;font-size:25px}.page-title p{margin:0;color:var(--muted)}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}.stat,.card{background:#fff;border-radius:15px;box-shadow:var(--shadow)}.stat{padding:18px}.stat span{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;font-weight:800}.stat strong{display:block;font-size:29px;margin-top:7px}.card{padding:20px}.card+.card{margin-top:20px}.card-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:14px;margin-bottom:17px;border-bottom:1px solid var(--border)}.card-head h3{font-size:17px;margin:0}.card-head p{font-size:12px;color:var(--muted);margin:4px 0 0}.grid-two{display:grid;grid-template-columns:1fr 1.35fr;gap:20px}.alert{padding:12px 14px;border-radius:10px;margin-bottom:15px;line-height:1.45}.alert-success{background:#daf3e5;color:#0d6437}.alert-error{background:#ffe0e5;color:#9d1930}.alert-info{background:#e1edff;color:#174f96}.badge{display:inline-flex;align-items:center;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:900}.badge-weight{background:#fff1c8;color:#745600}.badge-photo{background:#deebff;color:#17519a}.badge-done{background:#d9f3e5;color:#0b6436}.badge-missing{background:#ffe0e5;color:#9d1930;border:1px solid #f4b8c3}.badge-partial{background:#fff0cf;color:#7b5300;border:1px solid #f0d797}.row-partial{background:#fffaf0}.row-partial td:first-child{border-left:4px solid #d99a00}.partial-warning{margin:14px 0;padding:14px;border-radius:11px;background:#fff8e8;color:#755300;border:1px solid #efd99c;font-weight:700;line-height:1.45}.badge-postponed{background:#efe7ff;color:#5d3597;border:1px solid #d8c3f6}.badge-overdue{background:#ffe0e5;color:#9d1930;border:1px solid #f4b8c3}.badge-cancelled{background:#eceff3;color:#4b5563;border:1px solid #cfd5dc}.row-cancelled{background:#f7f8fa}.row-cancelled td:first-child{border-left:4px solid #667085}.queue-card.cancelled{border:2px solid #98a2b3;background:#f8f9fb}.cancelled-warning{margin:14px 0;padding:14px;border-radius:11px;background:#f3f4f6;color:#475467;border:1px solid #d0d5dd;font-weight:700;line-height:1.5}.adjustment-warning{margin:14px 0;padding:14px;border-radius:11px;background:#eef4ff;color:#1849a9;border:1px solid #b2ccff;font-weight:700;line-height:1.5}.row-postponed{background:#fbf8ff}.row-postponed td:first-child{border-left:4px solid #8057b3}.queue-card.postponed{border:2px solid #aa87d4;background:#fcfaff}.postponed-warning{margin:14px 0;padding:14px;border-radius:11px;background:#f6f0ff;color:#583783;border:1px solid #d9c6f2;font-weight:700;line-height:1.5}.overdue-warning{background:#fff0f2;color:#8f1730;border-color:#f2bcc6}.row-missing{background:#fff6f7}.row-missing td:first-child{border-left:4px solid #e3062f}.queue-card.missing{border:2px solid #e3062f;background:#fff7f8}.missing-warning{margin:14px 0;padding:14px;border-radius:11px;background:#fff0f2;color:#8f1730;border:1px solid #f2bcc6;font-weight:700;line-height:1.45}.badge-admin{background:#eee5ff;color:#6133a5}.badge-active{background:#d9f3e5;color:#0b6436}.badge-inactive{background:#eceff3;color:#5e6672}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse}th,td{padding:11px 9px;border-bottom:1px solid var(--border);text-align:left;white-space:nowrap;font-size:13px}th{font-size:11px;color:var(--muted);text-transform:uppercase}.description{white-space:normal;min-width:250px;line-height:1.35}.search-row{display:grid;grid-template-columns:2fr 1fr;gap:10px}.filter-row{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:10px;align-items:end}.filter-field label{display:block;font-size:11px;font-weight:800;color:var(--muted);margin:0 0 6px;text-transform:uppercase}.clear-filter{white-space:nowrap}.queue{display:grid;gap:13px;margin-top:18px}.queue-card{border:1px solid var(--border);border-radius:13px;padding:16px}.queue-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.queue-head h3{margin:0;font-size:18px}.queue-head p{margin:4px 0 0;color:var(--muted);font-size:13px}.queue-info,.details{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.queue-info>div,.details>div{background:#f6f8fa;border-radius:9px;padding:10px}.label{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;font-weight:800;margin-bottom:4px}.queue-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}.empty{text-align:center;padding:30px;color:var(--muted)}.import-layout{display:flex;align-items:center;justify-content:space-between;gap:18px}.import-about{display:flex;gap:13px;align-items:center}.xls-icon{width:56px;height:56px;border-radius:14px;background:#daf3e5;color:#0b6436;display:grid;place-items:center;font-weight:900}.import-about p{margin:4px 0 0;color:var(--muted);font-size:12px;line-height:1.45}.file-input{position:absolute;opacity:0;width:1px;height:1px;overflow:hidden}.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:15px 0}.summary div{border:1px solid var(--border);border-radius:10px;padding:11px}.summary span{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;font-weight:800}.summary strong{font-size:21px;display:block;margin-top:4px}.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.58);padding:18px;display:grid;place-items:center;z-index:100}.modal{width:min(1000px,100%);max-height:calc(100vh - 36px);overflow:auto;background:#fff;border-radius:18px;padding:21px}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:17px}.modal-head h3{margin:0}.weights{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin:14px 0}.weight-box{border:1px solid var(--border);background:#fafbfc;border-radius:11px;padding:12px}.weight-box label{display:block;font-weight:800;font-size:12px;margin-bottom:7px}.total{display:flex;justify-content:space-between;align-items:center;background:#edf1f5;border-radius:11px;padding:14px;margin:13px 0 17px}.total strong{font-size:22px}.upload-grid,.image-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.photo-progress{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}.photo-progress>div{padding:12px;border-radius:10px;background:#f2f4f7}.photo-progress strong{display:block;font-size:18px;margin-top:3px}.box-photo-card{border:1px solid var(--border);border-radius:14px;padding:15px;margin-top:13px;background:#fff}.box-photo-card>h4{margin:0 0 12px;font-size:16px}.photo-pair{display:grid;grid-template-columns:1fr 1fr;gap:13px}.photo-slot{border:2px dashed var(--border);border-radius:12px;padding:12px;background:#fbfcfd}.photo-slot.complete{border-color:#4fad7a;background:#f4fbf7}.photo-slot h5{margin:0 0 4px}.photo-slot p{margin:0 0 10px;color:var(--muted);font-size:12px}.photo-buttons{display:grid;grid-template-columns:1fr 1fr;gap:7px}.photo-button{display:flex;align-items:center;justify-content:center;min-height:39px;border-radius:9px;padding:8px;font-size:12px;font-weight:800;cursor:pointer;text-align:center}.photo-camera{background:var(--text);color:#fff}.photo-gallery{background:#fff;color:var(--text);border:1px solid var(--border)}.photo-preview-wrap{position:relative;margin-top:10px}.preview{display:none;width:100%;height:190px;object-fit:contain;background:#edf0f3;border-radius:10px}.preview.visible{display:block}.remove-photo{display:none;position:absolute;right:7px;top:7px;border:0;border-radius:999px;background:rgba(157,25,48,.9);color:#fff;width:31px;height:31px;font-weight:900;cursor:pointer}.photo-preview-wrap.has-photo .remove-photo{display:block}.image-card{border:1px solid var(--border);border-radius:12px;padding:12px}.image-card h4{margin:0 0 9px}.image-card img{width:100%;max-height:420px;object-fit:contain;background:#edf0f3;border-radius:9px}.box-images{border:1px solid var(--border);border-radius:13px;padding:13px;margin-top:13px}.box-images h4{margin:0 0 10px}.weight-list{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;padding:0;list-style:none}.weight-list li{background:#f2f4f6;border-radius:9px;padding:10px}.modal-footer{display:flex;justify-content:flex-end;gap:9px;margin-top:16px}.admin-grid{display:grid;grid-template-columns:.9fr 1.5fr;gap:20px}.account-list{display:grid;gap:12px}.account-card{border:1px solid var(--border);border-radius:12px;padding:15px;display:flex;justify-content:space-between;align-items:center;gap:14px}.account-card.inactive{opacity:.62;background:#f6f7f9}.account-main strong{display:block;font-size:15px}.account-main span{display:block;color:var(--muted);font-size:12px;margin-top:4px}.account-actions{display:flex;gap:7px;flex-wrap:wrap}.pagination{margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.pagination-info{color:var(--muted);font-size:13px}.pagination-buttons{display:flex;align-items:center;gap:7px;flex-wrap:wrap}.page-button{min-width:38px;height:38px;padding:0 11px;border:1px solid var(--border);border-radius:9px;background:#fff;color:var(--text);font-weight:700;cursor:pointer}.page-button.active{background:var(--red);border-color:var(--red);color:#fff}.spinner{width:22px;height:22px;border:3px solid #ddd;border-top-color:var(--red);border-radius:50%;animation:spin .8s linear infinite;margin:auto}@keyframes spin{to{transform:rotate(360deg)}}
 @media(max-width:850px){.grid-two,.stats,.upload-grid,.image-grid,.admin-grid{grid-template-columns:1fr}.photo-pair{grid-template-columns:1fr}.queue-info,.details{grid-template-columns:repeat(2,1fr)}.weights,.weight-list{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:850px){.filter-row{grid-template-columns:1fr 1fr}.filter-row .search-main{grid-column:1/-1}}
 @media(max-width:560px){.filter-row{grid-template-columns:1fr}.filter-row .search-main{grid-column:auto}.clear-filter{width:100%}.photo-progress,.photo-buttons{grid-template-columns:1fr}.container{width:calc(100% - 18px);margin-top:15px}.header{padding:10px}.brand p,.user-text{display:none}.card,.modal,.login-card{padding:16px}.search-row,.queue-info,.details,.weights,.weight-list,.summary{grid-template-columns:1fr}.import-layout,.queue-head,.account-card{flex-direction:column;align-items:stretch}.queue-actions{flex-direction:column}.queue-actions .btn{width:100%}}
@@ -21,7 +21,7 @@
 <div class="card"><div class="card-head"><div><h3>Importar planilha</h3><p>Colunas: COD PEDIDO, CODIGO, DESCRICAO, QTD e UN.</p></div></div><div class="import-layout"><div class="import-about"><div class="xls-icon">XLS</div><div><strong>Planilha de pedidos</strong><p>Os registros entram automaticamente como aguardando pesagem.</p></div></div><label class="btn btn-primary" for="xlsxInput">Selecionar planilha</label><input id="xlsxInput" class="file-input" type="file" accept=".xls,.xlsx"></div></div>
 <div class="grid-two"><div class="card"><div class="card-head"><div><h3>Novo pedido</h3><p>Cadastro manual para exceções.</p></div></div><form id="orderForm"><div class="form-group"><label>Pedido</label><input id="orderNumber" class="control" required></div><div class="form-group"><label>Item</label><input id="itemNumber" class="control" required></div><div class="form-group"><label>Descrição</label><input id="description" class="control" required></div><div class="form-group"><label>Quantidade de caixas</label><input id="boxesQuantity" class="control" type="number" min="1" required></div><div class="form-group"><label>Unidade</label><input id="unit" class="control" value="CX" required></div><div class="form-group"><label>Observação</label><textarea id="observation" class="control"></textarea></div><button class="btn btn-primary btn-block">Enviar para pesagem</button></form></div>
 <div class="card"><div class="card-head"><div><h3>Pedidos</h3><p>10 registros por página.</p></div></div><div class="filter-row"><div class="filter-field search-main"><label>Pesquisar</label><input id="billingSearch" class="control" placeholder="Pedido, item ou descrição"></div><div class="filter-field"><label>Data inicial</label><input id="billingDateFrom" class="control" type="date"></div><div class="filter-field"><label>Data final</label><input id="billingDateTo" class="control" type="date"></div><button id="clearBillingDates" class="btn btn-outline clear-filter" type="button">Limpar datas</button></div><div id="billingList" style="margin-top:15px"></div></div></div></section>
-<section id="scalePage" class="hidden"><div class="page-title"><h2>Pesagem e fotos</h2><p>Fila compartilhada em tempo real entre os computadores.</p></div><div class="stats"><div class="stat"><span>Aguardando pesagem</span><strong id="scaleWeight">0</strong></div><div class="stat"><span>Aguardando fotos</span><strong id="scalePhotos">0</strong></div><div class="stat"><span>Concluídos</span><strong id="scaleDone">0</strong></div></div><div class="card"><div class="card-head"><div><h3>Fila de pedidos</h3><p>10 registros por página.</p></div></div><div class="filter-row"><div class="filter-field search-main"><label>Pesquisar</label><input id="scaleSearch" class="control" placeholder="Pedido, item ou descrição"></div><div class="filter-field"><label>Status</label><select id="statusFilter" class="control"><option value="pending">Todos os pendentes ativos</option><option value="aguardando_pesagem">Aguardando pesagem</option><option value="aguardando_fotos">Aguardando fotos</option><option value="adiado">Adiados</option><option value="parcial_aguardando_faturamento">Parcial - Produção Meggs</option><option value="falta_substituicao">FALTA - SUBSTITUIÇÃO DE ITEM</option><option value="concluido">Concluídos</option><option value="all">Todos</option></select></div><div class="filter-field"><label>Data inicial</label><input id="scaleDateFrom" class="control" type="date"></div><div class="filter-field"><label>Data final</label><input id="scaleDateTo" class="control" type="date"></div><button id="clearScaleDates" class="btn btn-outline clear-filter" type="button">Limpar datas</button></div><div id="queueList"></div></div></section>
+<section id="scalePage" class="hidden"><div class="page-title"><h2>Pesagem e fotos</h2><p>Fila compartilhada em tempo real entre os computadores.</p></div><div class="stats"><div class="stat"><span>Aguardando pesagem</span><strong id="scaleWeight">0</strong></div><div class="stat"><span>Aguardando fotos</span><strong id="scalePhotos">0</strong></div><div class="stat"><span>Concluídos</span><strong id="scaleDone">0</strong></div></div><div class="card"><div class="card-head"><div><h3>Fila de pedidos</h3><p>10 registros por página.</p></div></div><div class="filter-row"><div class="filter-field search-main"><label>Pesquisar</label><input id="scaleSearch" class="control" placeholder="Pedido, item ou descrição"></div><div class="filter-field"><label>Status</label><select id="statusFilter" class="control"><option value="pending">Todos os pendentes ativos</option><option value="aguardando_pesagem">Aguardando pesagem</option><option value="aguardando_fotos">Aguardando fotos</option><option value="adiado">Adiados</option><option value="pesagem_cancelada">Pesagem cancelada</option><option value="parcial_aguardando_faturamento">Parcial - Produção Meggs</option><option value="falta_substituicao">FALTA - SUBSTITUIÇÃO DE ITEM</option><option value="concluido">Concluídos</option><option value="all">Todos</option></select></div><div class="filter-field"><label>Data inicial</label><input id="scaleDateFrom" class="control" type="date"></div><div class="filter-field"><label>Data final</label><input id="scaleDateTo" class="control" type="date"></div><button id="clearScaleDates" class="btn btn-outline clear-filter" type="button">Limpar datas</button></div><div id="queueList"></div></div></section>
 <section id="adminPage" class="hidden"><div class="page-title"><h2>Administração</h2><p>Crie e gerencie as contas dos funcionários.</p></div><div class="stats"><div class="stat"><span>Total de contas</span><strong id="accountTotal">0</strong></div><div class="stat"><span>Ativas</span><strong id="accountActive">0</strong></div><div class="stat"><span>Desativadas</span><strong id="accountInactive">0</strong></div></div><div class="admin-grid"><div class="card"><div class="card-head"><div><h3 id="accountFormTitle">Criar nova conta</h3><p>O funcionário usará e-mail e senha para entrar.</p></div></div><form id="accountForm"><input id="accountId" type="hidden"><div class="form-group"><label>Nome</label><input id="accountName" class="control" required></div><div class="form-group"><label>Usuário</label><input id="accountUsername" class="control" required></div><div class="form-group"><label>E-mail</label><input id="accountEmail" class="control" type="email" required></div><div class="form-group"><label>Senha</label><input id="accountPassword" class="control" type="password"><small id="passwordHelp">Mínimo de 6 caracteres.</small></div><div class="form-group"><label>Perfil</label><select id="accountRole" class="control"><option value="faturamento">Faturamento</option><option value="gerencia">Gerência</option><option value="balanca">Pesagem e fotos</option><option value="admin">Administrador</option></select></div><button id="saveAccountButton" class="btn btn-primary btn-block">Criar conta</button><button id="cancelAccountEdit" type="button" class="btn btn-muted btn-block hidden" style="margin-top:8px">Cancelar edição</button></form></div><div class="card"><div class="card-head"><div><h3>Contas cadastradas</h3><p>Alterações são aplicadas imediatamente.</p></div></div><input id="accountSearch" class="control" placeholder="Pesquisar nome, usuário, e-mail ou perfil"><div id="accountList" style="margin-top:15px"></div></div></div></section>
 </main></section>
 <div id="modalBg" class="modal-bg hidden"><div class="modal"><div class="modal-head"><h3 id="modalTitle"></h3><button id="closeModal" class="btn btn-muted btn-small">Fechar</button></div><div id="modalContent"></div></div></div>
@@ -43,13 +43,15 @@ const badge=(s,postponedUntil=null,overdue=false)=>`<span class="badge ${
   s==='aguardando_fotos'?'badge-photo':
   s==='falta_substituicao'?'badge-missing':
   s==='parcial_aguardando_faturamento'?'badge-partial':
-  s==='adiado'?(overdue?'badge-overdue':'badge-postponed'):'badge-done'
+  s==='adiado'?(overdue?'badge-overdue':'badge-postponed'):
+  s==='pesagem_cancelada'?'badge-cancelled':'badge-done'
 }">${
   s==='aguardando_pesagem'?'Aguardando pesagem':
   s==='aguardando_fotos'?'Aguardando fotos':
   s==='falta_substituicao'?'FALTA - SUBSTITUIÇÃO DE ITEM':
   s==='parcial_aguardando_faturamento'?'PARCIAL - PRODUÇÃO MEGGS':
-  s==='adiado'?(overdue?`ADIAMENTO VENCIDO — ${dateOnly(postponedUntil)}`:`ADIADO ATÉ ${dateOnly(postponedUntil)}`):'Concluído'
+  s==='adiado'?(overdue?`ADIAMENTO VENCIDO — ${dateOnly(postponedUntil)}`:`ADIADO ATÉ ${dateOnly(postponedUntil)}`):
+  s==='pesagem_cancelada'?'PESAGEM CANCELADA / BLOQUEADA':'Concluído'
 }</span>`;function alertBox(target,msg,type='success',time=5000){target.innerHTML=`<div class="alert alert-${type}">${esc(msg)}</div>`;if(time)setTimeout(()=>target.innerHTML='',time)}function openModal(){$('modalBg').classList.remove('hidden')}function closeModal(){$('modalBg').classList.add('hidden');$('modalContent').innerHTML='';currentOrder=null;sackFile=null;scaleFile=null}$('closeModal').onclick=closeModal;$('modalBg').onclick=e=>{if(e.target===$('modalBg'))closeModal()};
 async function loadProfile(){const {data:{user}}=await sb.auth.getUser();if(!user)return null;const {data,error}=await sb.from('profiles').select('*').eq('id',user.id).single();if(error)throw error;if(!data.active){await sb.auth.signOut();throw new Error('Esta conta está desativada.')}return {...data,email:user.email}}
 async function boot(){if(booting)return;booting=true;try{const {data:{session}}=await sb.auth.getSession();if(!session){showLogin();return}profile=await loadProfile();showApp();await loadOrders();await subscribeOrders();if(profile.role==='admin')await renderAdmin()}catch(e){showLogin();alertBox($('loginAlert'),e.message,'error')}finally{booting=false}}
@@ -100,7 +102,9 @@ function renderBillingList(){
   const start=(billingPageNumber-1)*PAGE_SIZE,items=list.slice(start,start+PAGE_SIZE);
   $('billingList').innerHTML=list.length?`<div class="table-wrap"><table><thead><tr><th>Pedido</th><th>Item</th><th>Descrição</th><th>QTD</th><th>Superfrio</th><th>Produção - Meggs</th><th>Pendente</th><th>Data</th><th>Status</th><th>Ação</th></tr></thead><tbody>${items.map(o=>{
     const sf=superfrioCount(o),stock=meggsStockCount(o),pending=pendingBoxCount(o),overdue=isPostponementOverdue(o);
-    const rowClass=o.status==='falta_substituicao'?'row-missing':o.status==='parcial_aguardando_faturamento'?'row-partial':o.status==='adiado'?'row-postponed':'';
+    const rowClass=o.status==='falta_substituicao'?'row-missing':o.status==='parcial_aguardando_faturamento'?'row-partial':o.status==='adiado'?'row-postponed':o.status==='pesagem_cancelada'?'row-cancelled':'';
+    const canOperationalMessage=!['concluido','falta_substituicao'].includes(o.status);
+    const canCancel=['aguardando_pesagem','aguardando_fotos','adiado'].includes(o.status);
     return `<tr class="${rowClass}">
       <td><strong>${esc(o.order_number)}</strong></td>
       <td>${esc(o.item_number)}</td>
@@ -112,9 +116,12 @@ function renderBillingList(){
       <td>${date(o.created_at)}</td>
       <td>${badge(o.status,o.postponed_until,overdue)}</td>
       <td>
-        ${o.status==='aguardando_fotos'?`<button class="btn btn-muted btn-small" onclick="openPostpone('${o.id}')">Adiar</button> `:''}
+        ${o.status==='aguardando_fotos'?`<button class="btn btn-primary btn-small" onclick="openWeightAdjustment('${o.id}')">Ajustar pesagem</button> <button class="btn btn-muted btn-small" onclick="openPostpone('${o.id}')">Adiar</button> `:''}
         ${o.status==='adiado'?`<button class="btn btn-success btn-small" onclick="resumePostponedOrder('${o.id}')">Retomar</button> `:''}
+        ${canCancel?`<button class="btn btn-danger btn-small" onclick="openCancelWeighing('${o.id}')">Cancelar pesagem</button> `:''}
+        ${o.status==='pesagem_cancelada'?`<button class="btn btn-success btn-small" onclick="reactivateWeighing('${o.id}')">Reativar pesagem</button> `:''}
         ${o.status==='parcial_aguardando_faturamento'&&pending>0?`<button class="btn btn-success btn-small" onclick="openProductionMeggs('${o.id}')">Lançar Produção - Meggs (${pending})</button> `:''}
+        ${canOperationalMessage?`<button class="btn btn-outline btn-small" onclick="openBillingMessage('${o.id}')">Avisar Superfrio</button> `:''}
         <button class="btn btn-outline btn-small" onclick="showDetails('${o.id}')">Ver</button>
       </td>
     </tr>`;
@@ -128,19 +135,21 @@ function renderScale(){$('scaleWeight').textContent=allOrders.filter(o=>o.status
 function renderQueue(){
   const q=$('scaleSearch').value.trim().toLowerCase(),f=$('statusFilter').value;
   let list=allOrders.filter(o=>(!q||o.order_number.includes(q)||o.item_number.includes(q)||(o.description||'').toLowerCase().includes(q))&&matchesDateRange(o,'scaleDateFrom','scaleDateTo'));
-  if(f==='pending')list=list.filter(o=>!['concluido','parcial_aguardando_faturamento','adiado'].includes(o.status));
+  if(f==='pending')list=list.filter(o=>!['concluido','parcial_aguardando_faturamento','adiado','pesagem_cancelada'].includes(o.status));
   else if(f!=='all')list=list.filter(o=>o.status===f);
-  const priority={falta_substituicao:0,aguardando_fotos:1,aguardando_pesagem:2,adiado:3,parcial_aguardando_faturamento:4,concluido:5};
+  const priority={falta_substituicao:0,aguardando_fotos:1,aguardando_pesagem:2,adiado:3,pesagem_cancelada:4,parcial_aguardando_faturamento:5,concluido:6};
   list.sort((a,b)=>(priority[a.status]??9)-(priority[b.status]??9)||new Date(b.created_at)-new Date(a.created_at));
   const pages=Math.max(1,Math.ceil(list.length/PAGE_SIZE));
   scalePageNumber=Math.min(scalePageNumber,pages);
   const start=(scalePageNumber-1)*PAGE_SIZE,items=list.slice(start,start+PAGE_SIZE);
   $('queueList').innerHTML=list.length?`<div class="queue">${items.map(o=>{
     const sf=superfrioCount(o),pending=pendingBoxCount(o),overdue=isPostponementOverdue(o);
-    const cardClass=o.status==='falta_substituicao'?'missing':o.status==='adiado'?'postponed':'';
+    const cardClass=o.status==='falta_substituicao'?'missing':o.status==='adiado'?'postponed':o.status==='pesagem_cancelada'?'cancelled':'';
     return `<article class="queue-card ${cardClass}">
       <div class="queue-head"><div><h3>Pedido ${esc(o.order_number)}</h3><p>Item ${esc(o.item_number)} — ${esc(o.description)}</p></div>${badge(o.status,o.postponed_until,overdue)}</div>
       ${o.status==='adiado'?`<div class="${overdue?'postponed-warning overdue-warning':'postponed-warning'}">Este item está suspenso para fotos. Nova programação: <strong>${dateOnly(o.postponed_until)}</strong>${o.postponement_reason?` — ${esc(o.postponement_reason)}`:''}</div>`:''}
+      ${o.status==='pesagem_cancelada'?`<div class="cancelled-warning">🔒 PESAGEM BLOQUEADA PELO FATURAMENTO.${o.weight_cancel_reason?` Motivo: ${esc(o.weight_cancel_reason)}.`:''} Os pesos já informados permanecem vinculados a este pedido e não devem ser usados em outro.</div>`:''}
+      ${o.status==='aguardando_pesagem'&&o.weight_adjustment_reason?`<div class="adjustment-warning">AJUSTE / COMPLEMENTO SOLICITADO PELO FATURAMENTO: ${esc(o.weight_adjustment_reason)}</div>`:''}
       <div class="queue-info">
         <div><span class="label">Caixas pedidas</span><strong>${o.boxes_quantity}</strong></div>
         <div><span class="label">Superfrio</span><strong>${sf||'—'}</strong></div>
@@ -148,7 +157,7 @@ function renderQueue(){
         <div><span class="label">Peso total</span><strong>${weight(o.total_weight)}</strong></div>
       </div>
       <div class="queue-actions">
-        ${o.status==='aguardando_pesagem'?`<button class="btn btn-primary" onclick="openWeights('${o.id}')">Lançar pesos</button>`:''}
+        ${o.status==='aguardando_pesagem'?`<button class="btn btn-primary" onclick="openWeights('${o.id}')">${Array.isArray(o.box_weights)&&o.box_weights.length?'Revisar / complementar pesos':'Lançar pesos'}</button>`:''}
         ${o.status==='aguardando_fotos'?`<button class="btn btn-success" onclick="openPhotos('${o.id}')">Anexar fotos</button>`:''}
         <button class="btn btn-outline" onclick="showDetails('${o.id}')">Ver detalhes</button>
       </div>
@@ -169,6 +178,10 @@ function detailsHtml(o){
     warning=`<div class="partial-warning">PROCESSAMENTO PARCIAL: a Superfrio processou <strong>${sf} de ${o.boxes_quantity}</strong> caixas. Restam <strong>${pending}</strong> caixa(s) para o Faturamento lançar como Produção - Meggs.</div>`;
   }else if(o.status==='adiado'){
     warning=`<div class="${overdue?'postponed-warning overdue-warning':'postponed-warning'}">${overdue?'ADIAMENTO VENCIDO':'PEDIDO ADIADO'}: fotos suspensas até <strong>${dateOnly(o.postponed_until)}</strong>.${o.postponement_reason?` Motivo: ${esc(o.postponement_reason)}.`:''}${o.postponed_by_name?` Adiado por ${esc(o.postponed_by_name)}.`:''}</div>`;
+  }else if(o.status==='pesagem_cancelada'){
+    warning=`<div class="cancelled-warning">PESAGEM CANCELADA / BLOQUEADA.${o.weight_cancel_reason?` Motivo: ${esc(o.weight_cancel_reason)}.`:''}${o.weight_cancelled_by_name?` Cancelado por ${esc(o.weight_cancelled_by_name)}.`:''} Os pesos permanecem vinculados a este pedido.</div>`;
+  }else if(o.status==='aguardando_pesagem'&&o.weight_adjustment_reason){
+    warning=`<div class="adjustment-warning">AJUSTE / COMPLEMENTO DE PESAGEM SOLICITADO: ${esc(o.weight_adjustment_reason)}</div>`;
   }
   return`${warning}<div class="details">
     <div><span class="label">Pedido</span><strong>${esc(o.order_number)}</strong></div>
@@ -187,6 +200,137 @@ function detailsHtml(o){
     ${o.postponement_reason?`<div style="grid-column:1/-1"><span class="label">Motivo do adiamento</span><strong>${esc(o.postponement_reason)}</strong></div>`:''}
     <div style="grid-column:1/-1"><span class="label">Observação</span><strong>${esc(o.observation||'—')}</strong></div>
   </div>`;
+}
+
+
+window.openWeightAdjustment=id=>{
+  if(!['admin','faturamento','gerencia'].includes(profile.role))return;
+  const o=allOrders.find(x=>x.id===id);if(!o||o.status!=='aguardando_fotos')return;
+  currentOrder=o;
+  $('modalTitle').textContent=`Ajustar pesagem — Pedido ${o.order_number}, Item ${o.item_number}`;
+  $('modalContent').innerHTML=`${detailsHtml(o)}
+    <div class="alert alert-info">Use esta opção quando precisar de complemento, correção ou revisão dos pesos já informados. Os pesos atuais ficam preservados até a Superfrio salvar a nova pesagem.</div>
+    <div class="form-group">
+      <label>Orientação para a Superfrio</label>
+      <textarea id="weightAdjustmentReason" class="control" placeholder="Ex.: complementar mais 2 caixas / revisar o peso da caixa 3" required></textarea>
+    </div>
+    <button id="saveWeightAdjustment" class="btn btn-primary btn-block" type="button">Solicitar ajuste / complemento</button>`;
+  $('saveWeightAdjustment').onclick=saveWeightAdjustment;
+  openModal();
+};
+
+async function saveWeightAdjustment(){
+  const o=currentOrder;if(!o)return;
+  const reason=$('weightAdjustmentReason')?.value.trim()||'';
+  if(!reason)return alertBox($('globalAlert'),'Informe o que precisa ser ajustado ou complementado.','error');
+  const now=new Date().toISOString();
+  const {data:updated,error}=await sb.from('orders').update({
+    status:'aguardando_pesagem',
+    weight_adjustment_reason:reason,
+    weight_adjustment_requested_by:profile.id,
+    weight_adjustment_requested_by_name:profile.name,
+    weight_adjustment_requested_at:now,
+    updated_at:now
+  }).eq('id',o.id).select('*').single();
+  if(error)return alertBox($('globalAlert'),`Não foi possível solicitar o ajuste: ${error.message}`,'error',9000);
+  closeModal();
+  await loadOrders();
+  const emailResult=await notifyByEmail('weight_adjustment_requested',{...updated,responsible_name:profile.name});
+  alertBox($('globalAlert'),emailResult.ok?'Ajuste/complemento solicitado e Superfrio avisada por e-mail.':`Ajuste solicitado, mas o e-mail falhou: ${emailResult.error}`,emailResult.ok?'success':'error',10000);
+}
+
+window.openCancelWeighing=id=>{
+  if(!['admin','faturamento','gerencia'].includes(profile.role))return;
+  const o=allOrders.find(x=>x.id===id);if(!o||!['aguardando_pesagem','aguardando_fotos','adiado'].includes(o.status))return;
+  currentOrder=o;
+  $('modalTitle').textContent=`Cancelar pesagem — Pedido ${o.order_number}, Item ${o.item_number}`;
+  $('modalContent').innerHTML=`${detailsHtml(o)}
+    <div class="cancelled-warning">O item ficará bloqueado para a Superfrio. Nenhuma foto ou nova pesagem poderá ser enviada até o Faturamento reativar.</div>
+    <div class="form-group">
+      <label>Motivo do cancelamento</label>
+      <textarea id="weightCancelReason" class="control" placeholder="Informe o motivo do cancelamento" required></textarea>
+    </div>
+    <button id="saveWeightCancellation" class="btn btn-danger btn-block" type="button">Confirmar cancelamento e bloquear</button>`;
+  $('saveWeightCancellation').onclick=saveWeightCancellation;
+  openModal();
+};
+
+async function saveWeightCancellation(){
+  const o=currentOrder;if(!o)return;
+  const reason=$('weightCancelReason')?.value.trim()||'';
+  if(!reason)return alertBox($('globalAlert'),'Informe o motivo do cancelamento.','error');
+  const now=new Date().toISOString();
+  const {data:updated,error}=await sb.from('orders').update({
+    status:'pesagem_cancelada',
+    weight_cancel_reason:reason,
+    weight_cancel_previous_status:o.status,
+    weight_cancelled_by:profile.id,
+    weight_cancelled_by_name:profile.name,
+    weight_cancelled_at:now,
+    updated_at:now
+  }).eq('id',o.id).select('*').single();
+  if(error)return alertBox($('globalAlert'),`Não foi possível cancelar a pesagem: ${error.message}`,'error',9000);
+  closeModal();
+  await loadOrders();
+  const emailResult=await notifyByEmail('weight_cancelled',{...updated,responsible_name:profile.name});
+  alertBox($('globalAlert'),emailResult.ok?'Pesagem cancelada/bloqueada e Superfrio avisada por e-mail.':`Pesagem bloqueada, mas o e-mail falhou: ${emailResult.error}`,emailResult.ok?'success':'error',10000);
+}
+
+window.reactivateWeighing=async id=>{
+  if(!['admin','faturamento','gerencia'].includes(profile.role))return;
+  const o=allOrders.find(x=>x.id===id);if(!o||o.status!=='pesagem_cancelada')return;
+  const ok=confirm(`Reativar a pesagem do pedido ${o.order_number}, item ${o.item_number}?\n\nA Superfrio voltará a poder revisar/lançar os pesos.`);
+  if(!ok)return;
+  const now=new Date().toISOString();
+  const {data:updated,error}=await sb.from('orders').update({
+    status:'aguardando_pesagem',
+    weight_reactivated_by:profile.id,
+    weight_reactivated_by_name:profile.name,
+    weight_reactivated_at:now,
+    weight_adjustment_reason:o.weight_adjustment_reason||'Pesagem reativada pelo Faturamento para nova conferência.',
+    updated_at:now
+  }).eq('id',o.id).select('*').single();
+  if(error)return alertBox($('globalAlert'),`Não foi possível reativar: ${error.message}`,'error',9000);
+  await loadOrders();
+  const emailResult=await notifyByEmail('weight_reactivated',{...updated,responsible_name:profile.name});
+  alertBox($('globalAlert'),emailResult.ok?'Pesagem reativada e Superfrio avisada por e-mail.':`Pesagem reativada, mas o e-mail falhou: ${emailResult.error}`,emailResult.ok?'success':'error',10000);
+};
+
+window.openBillingMessage=id=>{
+  if(!['admin','faturamento','gerencia'].includes(profile.role))return;
+  const o=allOrders.find(x=>x.id===id);if(!o)return;
+  currentOrder=o;
+  $('modalTitle').textContent=`Avisar Superfrio — Pedido ${o.order_number}, Item ${o.item_number}`;
+  $('modalContent').innerHTML=`${detailsHtml(o)}
+    <div class="form-group">
+      <label>Tipo do aviso</label>
+      <select id="billingMessageCategory" class="control">
+        <option value="Orientação operacional">Orientação operacional</option>
+        <option value="Complemento / alteração">Complemento / alteração</option>
+        <option value="Mudança de programação">Mudança de programação</option>
+        <option value="Cancelamento / bloqueio">Cancelamento / bloqueio</option>
+        <option value="Outro aviso">Outro aviso</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Mensagem</label>
+      <textarea id="billingMessageText" class="control" placeholder="Escreva a orientação que precisa chegar à Superfrio" required></textarea>
+    </div>
+    <button id="sendBillingMessage" class="btn btn-primary btn-block" type="button">Enviar aviso por e-mail</button>`;
+  $('sendBillingMessage').onclick=sendBillingMessage;
+  openModal();
+};
+
+async function sendBillingMessage(){
+  const o=currentOrder;if(!o)return;
+  const category=$('billingMessageCategory')?.value||'Orientação operacional';
+  const message=$('billingMessageText')?.value.trim()||'';
+  if(!message)return alertBox($('globalAlert'),'Escreva a mensagem para a Superfrio.','error');
+  const snapshot={...o,communication_category:category,communication_message:message,responsible_name:profile.name};
+  const emailResult=await notifyByEmail('billing_message',snapshot);
+  if(!emailResult.ok)return alertBox($('globalAlert'),`O aviso não pôde ser enviado: ${emailResult.error}`,'error',10000);
+  closeModal();
+  alertBox($('globalAlert'),'Aviso enviado para a equipe da Superfrio por e-mail.','success',8000);
 }
 
 window.openPostpone=id=>{
@@ -257,16 +401,18 @@ window.resumePostponedOrder=async id=>{
 };
 
 window.openWeights=id=>{
-  const o=allOrders.find(x=>x.id===id);if(!o)return;
+  const o=allOrders.find(x=>x.id===id);if(!o||o.status!=='aguardando_pesagem')return;
   currentOrder=o;
+  const defaultQty=superfrioCount(o)>0?superfrioCount(o):o.boxes_quantity;
   $('modalTitle').textContent=`Pesagem — Pedido ${o.order_number}, Item ${o.item_number}`;
   $('modalContent').innerHTML=`${detailsHtml(o)}
+    ${o.weight_adjustment_reason?`<div class="adjustment-warning">Solicitação do Faturamento: ${esc(o.weight_adjustment_reason)}</div>`:''}
     <div class="alert alert-info">
-      Informe quantas caixas realmente estão disponíveis na Superfrio. Ex.: pedido com 10 caixas e apenas 5 disponíveis → informe <strong>5</strong>. O sistema solicitará somente 5 pesos e depois 5 pares de fotos.
+      Informe quantas caixas realmente estão disponíveis na Superfrio. Se já existirem pesos, eles aparecem preenchidos para revisão/complemento.
     </div>
     <div class="form-group">
       <label>Caixas disponíveis na Superfrio (de ${o.boxes_quantity})</label>
-      <input id="availableBoxes" class="control" type="number" min="1" max="${o.boxes_quantity}" value="${o.boxes_quantity}">
+      <input id="availableBoxes" class="control" type="number" min="1" max="${o.boxes_quantity}" value="${defaultQty}">
     </div>
     <div id="weightsContainer"></div>
     <div class="total"><span>Peso total das caixas disponíveis</span><strong id="weightTotal">0,000 kg</strong></div>
@@ -286,7 +432,8 @@ function renderAvailableWeightInputs(){
   let qty=Math.floor(Number($('availableBoxes')?.value||0));
   qty=Math.max(1,Math.min(Number(currentOrder.boxes_quantity),qty||1));
   $('availableBoxes').value=qty;
-  $('weightsContainer').innerHTML=`<div class="weights">${Array.from({length:qty},(_,i)=>`<div class="weight-box"><label>Caixa ${i+1}</label><input class="control weight-input" type="number" min="0.001" step="0.001"></div>`).join('')}</div>`;
+  const existing=Array.isArray(currentOrder.box_weights)?currentOrder.box_weights:[];
+  $('weightsContainer').innerHTML=`<div class="weights">${Array.from({length:qty},(_,i)=>`<div class="weight-box"><label>Caixa ${i+1}</label><input class="control weight-input" type="number" min="0.001" step="0.001" value="${existing[i]??''}"></div>`).join('')}</div>`;
   document.querySelectorAll('.weight-input').forEach(i=>i.oninput=updateWeightTotal);
   updateWeightTotal();
 }
@@ -326,9 +473,7 @@ async function markItemMissing(){
   await loadOrders();
 }
 async function saveWeights(){
-  const orderSnapshot=currentOrder;
-  if(!orderSnapshot)return;
-
+  const orderSnapshot=currentOrder;if(!orderSnapshot)return;
   const available=Math.floor(Number($('availableBoxes')?.value||0));
   if(!Number.isInteger(available)||available<1||available>orderSnapshot.boxes_quantity)
     return alertBox($('globalAlert'),'Informe uma quantidade válida de caixas disponíveis.','error');
@@ -337,9 +482,8 @@ async function saveWeights(){
   if(values.length!==available||values.some(v=>!Number.isFinite(v)||v<=0))
     return alertBox($('globalAlert'),`Preencha os ${available} pesos corretamente.`,'error');
 
-  const btn=$('saveWeights');
-  if(btn){btn.disabled=true;btn.textContent='Salvando pesagem...'}
-
+  const previousWeights=Array.isArray(orderSnapshot.box_weights)?[...orderSnapshot.box_weights]:[];
+  const previousTotal=orderSnapshot.total_weight;
   const total=values.reduce((s,v)=>s+v,0);
   const weighedAt=new Date().toISOString();
 
@@ -347,36 +491,37 @@ async function saveWeights(){
     box_weights:values,
     total_weight:total,
     superfrio_boxes:available,
-    meggs_stock_boxes:Number(orderSnapshot.meggs_stock_boxes||0),
+    meggs_stock_boxes:0,
     status:'aguardando_fotos',
     weighed_by:profile.id,
     weighed_at:weighedAt,
+    weight_adjustment_reason:null,
+    weight_adjustment_requested_by:null,
+    weight_adjustment_requested_by_name:null,
+    weight_adjustment_requested_at:null,
     updated_at:weighedAt
   }).eq('id',orderSnapshot.id).select('*').single();
 
-  if(error){
-    if(btn){btn.disabled=false;btn.textContent='Salvar pesagem'}
-    return alertBox($('globalAlert'),`Não foi possível salvar a pesagem: ${error.message}`,'error',9000);
-  }
+  if(error)return alertBox($('globalAlert'),error.message,'error');
 
-  // Atualiza a fila imediatamente. O e-mail não pode bloquear o fluxo operacional.
-  closeModal();
-  await loadOrders();
-
-  const partial=available<orderSnapshot.boxes_quantity;
   const emailResult=await notifyByEmail('weighing_completed',{
     ...weighedOrder,
+    previous_box_weights:previousWeights,
+    previous_total_weight:previousTotal,
     responsible_name:profile.name
   });
 
-  const baseMessage=`Pesagem salva: ${available} de ${orderSnapshot.boxes_quantity} caixa(s) na Superfrio. Pedido liberado para fotos.`+
-    (partial?' Depois das fotos, a diferença seguirá para o Faturamento lançar como Produção - Meggs.':'');
-
+  closeModal();
+  await loadOrders();
+  const wasRevision=previousWeights.length>0;
+  const partial=available<orderSnapshot.boxes_quantity;
   alertBox(
     $('globalAlert'),
-    emailResult.ok?baseMessage:`${baseMessage} O e-mail não pôde ser enviado: ${emailResult.error}`,
+    emailResult.ok
+      ? `${wasRevision?'Pesagem revisada/complementada':'Pesagem salva'}: ${available} de ${orderSnapshot.boxes_quantity} caixa(s) na Superfrio. Agora aguardando fotos.${partial?' As demais serão direcionadas pelo Faturamento após as fotos.':''}`
+      : `Pesagem salva, mas o e-mail não pôde ser enviado: ${emailResult.error}`,
     emailResult.ok?'success':'error',
-    10000
+    9000
   );
 }
 window.openPhotos=id=>{
@@ -543,7 +688,7 @@ async function saveProductionMeggs(){
   const productionLine=`Produção - Meggs: +${qty} caixa(s) em ${new Intl.DateTimeFormat('pt-BR',{dateStyle:'short',timeStyle:'short'}).format(new Date())}${note?` — ${note}`:''}`;
   const newObservation=[originalObservation,productionLine].filter(Boolean).join('\n');
 
-  const {error}=await sb.from('orders').update({
+  const {data:updatedOrder,error}=await sb.from('orders').update({
     meggs_stock_boxes:newProduction,
     status:finalStatus,
     stock_completed_by:profile.id,
@@ -551,19 +696,29 @@ async function saveProductionMeggs(){
     completed_at:remaining===0?now:null,
     observation:newObservation,
     updated_at:now
-  }).eq('id',orderSnapshot.id);
+  }).eq('id',orderSnapshot.id).select('*').single();
 
   if(error)return alertBox($('globalAlert'),`Não foi possível salvar Produção - Meggs: ${error.message}`,'error',9000);
 
   closeModal();
   await loadOrders();
 
+  const emailResult=await notifyByEmail('production_meggs_updated',{
+    ...updatedOrder,
+    production_added:qty,
+    production_total:newProduction,
+    remaining_boxes:remaining,
+    responsible_name:profile.name
+  });
+
   alertBox(
     $('globalAlert'),
-    remaining===0
-      ? `Pedido concluído: ${sf} caixa(s) Superfrio + ${newProduction} caixa(s) Produção - Meggs = ${orderSnapshot.boxes_quantity} caixa(s).`
-      : `Produção - Meggs registrada: +${qty} caixa(s). Ainda restam ${remaining} caixa(s) pendentes.`,
-    'success',
+    emailResult.ok
+      ? (remaining===0
+          ? `Pedido concluído: ${sf} caixa(s) Superfrio + ${newProduction} caixa(s) Produção - Meggs = ${orderSnapshot.boxes_quantity} caixa(s). Superfrio avisada por e-mail.`
+          : `Produção - Meggs registrada: +${qty} caixa(s). Ainda restam ${remaining} caixa(s) pendentes. Superfrio avisada por e-mail.`)
+      : `Produção - Meggs salva, mas o e-mail para a Superfrio falhou: ${emailResult.error}`,
+    emailResult.ok?'success':'error',
     10000
   );
 }
