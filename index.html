@@ -8,7 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <style>
 :root{--red:#e3062f;--green:#188754;--blue:#1267d6;--bg:#f4f6f9;--white:#fff;--text:#202632;--muted:#687180;--border:#dce1e7;--shadow:0 10px 28px rgba(16,24,40,.08)}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}button,input,select,textarea{font:inherit}.hidden{display:none!important}.container{width:min(1220px,calc(100% - 28px));margin:24px auto}.header{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--border);min-height:70px;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:15px}.brand,.user{display:flex;align-items:center;gap:11px}.logo{width:44px;height:44px;border-radius:13px;background:var(--red);color:#fff;display:grid;place-items:center;font-size:22px;font-weight:900}.brand h1{font-size:19px;margin:0}.brand p,.user small{margin:3px 0 0;color:var(--muted);font-size:12px}.user-text{text-align:right}.user-text strong{display:block}.login-page{min-height:100vh;padding:20px;display:grid;place-items:center;background:radial-gradient(circle at top left,rgba(227,6,47,.14),transparent 36%),var(--bg)}.login-card{width:min(460px,100%);background:#fff;padding:30px;border-radius:20px;box-shadow:var(--shadow)}.login-card h1{margin:15px 0 7px}.login-card>p{color:var(--muted);line-height:1.5;margin:0 0 22px}.form-group{margin-bottom:16px}.form-group label{display:block;font-size:13px;font-weight:800;margin-bottom:7px}.control{width:100%;min-height:44px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:#fff;outline:none}.control:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(227,6,47,.1)}textarea.control{min-height:86px;resize:vertical}.btn{min-height:41px;padding:9px 15px;border:0;border-radius:10px;font-weight:800;cursor:pointer}.btn:disabled{opacity:.5;cursor:not-allowed}.btn-primary{background:var(--red);color:#fff}.btn-success{background:var(--green);color:#fff}.btn-outline{background:#fff;color:var(--text);border:1px solid var(--border)}.btn-muted{background:#edf0f4;color:var(--text)}.btn-danger{background:#ffe0e5;color:#9d1930}.btn-block{width:100%}.btn-small{min-height:34px;padding:6px 10px;font-size:12px}.page-title{margin-bottom:21px}.page-title h2{margin:0 0 5px;font-size:25px}.page-title p{margin:0;color:var(--muted)}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}.stat,.card{background:#fff;border-radius:15px;box-shadow:var(--shadow)}.stat{padding:18px}.stat span{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;font-weight:800}.stat strong{display:block;font-size:29px;margin-top:7px}.card{padding:20px}.card+.card{margin-top:20px}.card-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:14px;margin-bottom:17px;border-bottom:1px solid var(--border)}.card-head h3{font-size:17px;margin:0}.card-head p{font-size:12px;color:var(--muted);margin:4px 0 0}.grid-two{display:grid;grid-template-columns:1fr 1.35fr;gap:20px}.alert{padding:12px 14px;border-radius:10px;margin-bottom:15px;line-height:1.45}.alert-success{background:#daf3e5;color:#0d6437}.alert-error{background:#ffe0e5;color:#9d1930}.alert-info{background:#e1edff;color:#174f96}.badge{display:inline-flex;align-items:center;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:900}.badge-weight{background:#fff1c8;color:#745600}.badge-photo{background:#deebff;color:#17519a}.badge-done{background:#d9f3e5;color:#0b6436}.badge-missing{background:#ffe0e5;color:#9d1930;border:1px solid #f4b8c3}.badge-partial{background:#fff0cf;color:#7b5300;border:1px solid #f0d797}.row-partial{background:#fffaf0}.row-partial td:first-child{border-left:4px solid #d99a00}.partial-warning{margin:14px 0;padding:14px;border-radius:11px;background:#fff8e8;color:#755300;border:1px solid #efd99c;font-weight:700;line-height:1.45}.badge-postponed{background:#efe7ff;color:#5d3597;border:1px solid #d8c3f6}.badge-overdue{background:#ffe0e5;color:#9d1930;border:1px solid #f4b8c3}.badge-cancelled{background:#eceff3;color:#4b5563;border:1px solid #cfd5dc}.row-cancelled{background:#f7f8fa}.row-cancelled td:first-child{border-left:4px solid #667085}.queue-card.cancelled{border:2px solid #98a2b3;background:#f8f9fb}.cancelled-warning{margin:14px 0;padding:14px;border-radius:11px;background:#f3f4f6;color:#475467;border:1px solid #d0d5dd;font-weight:700;line-height:1.5}.adjustment-warning{margin:14px 0;padding:14px;border-radius:11px;background:#eef4ff;color:#1849a9;border:1px solid #b2ccff;font-weight:700;line-height:1.5}.badge-large{background:#e8f0ff;color:#174ea6;border:1px solid #b9cdf5}.row-large{background:#f7faff}.row-large td:first-child{border-left:4px solid #2869c7}.queue-card.large-batch{border:2px solid #6f9de0;background:#f8fbff}.large-batch-warning{margin:14px 0;padding:14px;border-radius:11px;background:#edf4ff;color:#174f96;border:1px solid #b7cff3;font-weight:700;line-height:1.5}.large-progress{margin:14px 0}.large-progress-track{height:12px;border-radius:999px;background:#dde5ef;overflow:hidden}.large-progress-fill{height:100%;background:#188754;border-radius:999px;transition:width .2s}.large-progress-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.large-progress-meta>div{background:#fff;border:1px solid #dce5f1;border-radius:9px;padding:9px;text-align:center}.large-progress-meta strong{display:block;font-size:16px}.large-progress-meta span{font-size:10px;color:var(--muted);font-weight:800;text-transform:uppercase}.delete-x{width:30px;height:30px;min-height:30px;padding:0;border-radius:8px;border:1px solid #f1b9c4;background:#fff5f6;color:#b4233b;font-size:18px;line-height:1;font-weight:900;cursor:pointer;vertical-align:middle}.delete-x:hover{background:#ffe2e7}.existing-photo{min-height:90px;display:grid;place-items:center;text-align:center;border:2px solid #70ad89;border-radius:12px;background:#f1faf5;color:#17633a;font-weight:900;padding:12px}.large-box-weight.done{border-color:#8dc4a3;background:#f3faf6}.large-batch-actions{display:flex;gap:8px;flex-wrap:wrap}.delivery-date{font-weight:800;color:#174f96}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}button,input,select,textarea{font:inherit}.hidden{display:none!important}.container{width:min(1220px,calc(100% - 28px));margin:24px auto}.header{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--border);min-height:70px;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:15px}.brand,.user{display:flex;align-items:center;gap:11px}.logo{width:44px;height:44px;border-radius:13px;background:var(--red);color:#fff;display:grid;place-items:center;font-size:22px;font-weight:900}.brand h1{font-size:19px;margin:0}.brand p,.user small{margin:3px 0 0;color:var(--muted);font-size:12px}.user-text{text-align:right}.user-text strong{display:block}.login-page{min-height:100vh;padding:20px;display:grid;place-items:center;background:radial-gradient(circle at top left,rgba(227,6,47,.14),transparent 36%),var(--bg)}.login-card{width:min(460px,100%);background:#fff;padding:30px;border-radius:20px;box-shadow:var(--shadow)}.login-card h1{margin:15px 0 7px}.login-card>p{color:var(--muted);line-height:1.5;margin:0 0 22px}.form-group{margin-bottom:16px}.form-group label{display:block;font-size:13px;font-weight:800;margin-bottom:7px}.control{width:100%;min-height:44px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:#fff;outline:none}.control:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(227,6,47,.1)}textarea.control{min-height:86px;resize:vertical}.btn{min-height:41px;padding:9px 15px;border:0;border-radius:10px;font-weight:800;cursor:pointer}.btn:disabled{opacity:.5;cursor:not-allowed}.btn-primary{background:var(--red);color:#fff}.btn-success{background:var(--green);color:#fff}.btn-outline{background:#fff;color:var(--text);border:1px solid var(--border)}.btn-muted{background:#edf0f4;color:var(--text)}.btn-danger{background:#ffe0e5;color:#9d1930}.btn-block{width:100%}.btn-small{min-height:34px;padding:6px 10px;font-size:12px}.page-title{margin-bottom:21px}.page-title h2{margin:0 0 5px;font-size:25px}.page-title p{margin:0;color:var(--muted)}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}.stat,.card{background:#fff;border-radius:15px;box-shadow:var(--shadow)}.stat{padding:18px}.stat span{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;font-weight:800}.stat strong{display:block;font-size:29px;margin-top:7px}.card{padding:20px}.card+.card{margin-top:20px}.card-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:14px;margin-bottom:17px;border-bottom:1px solid var(--border)}.card-head h3{font-size:17px;margin:0}.card-head p{font-size:12px;color:var(--muted);margin:4px 0 0}.grid-two{display:grid;grid-template-columns:1fr 1.35fr;gap:20px}.alert{padding:12px 14px;border-radius:10px;margin-bottom:15px;line-height:1.45}.alert-success{background:#daf3e5;color:#0d6437}.alert-error{background:#ffe0e5;color:#9d1930}.alert-info{background:#e1edff;color:#174f96}.badge{display:inline-flex;align-items:center;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:900}.badge-weight{background:#fff1c8;color:#745600}.badge-photo{background:#deebff;color:#17519a}.badge-done{background:#d9f3e5;color:#0b6436}.badge-missing{background:#ffe0e5;color:#9d1930;border:1px solid #f4b8c3}.badge-partial{background:#fff0cf;color:#7b5300;border:1px solid #f0d797}.row-partial{background:#fffaf0}.row-partial td:first-child{border-left:4px solid #d99a00}.partial-warning{margin:14px 0;padding:14px;border-radius:11px;background:#fff8e8;color:#755300;border:1px solid #efd99c;font-weight:700;line-height:1.45}.badge-postponed{background:#efe7ff;color:#5d3597;border:1px solid #d8c3f6}.badge-overdue{background:#ffe0e5;color:#9d1930;border:1px solid #f4b8c3}.badge-cancelled{background:#eceff3;color:#4b5563;border:1px solid #cfd5dc}.row-cancelled{background:#f7f8fa}.row-cancelled td:first-child{border-left:4px solid #667085}.queue-card.cancelled{border:2px solid #98a2b3;background:#f8f9fb}.cancelled-warning{margin:14px 0;padding:14px;border-radius:11px;background:#f3f4f6;color:#475467;border:1px solid #d0d5dd;font-weight:700;line-height:1.5}.adjustment-warning{margin:14px 0;padding:14px;border-radius:11px;background:#eef4ff;color:#1849a9;border:1px solid #b2ccff;font-weight:700;line-height:1.5}.badge-large{background:#e8f0ff;color:#174ea6;border:1px solid #b9cdf5}.row-large{background:#f7faff}.row-large td:first-child{border-left:4px solid #2869c7}.queue-card.large-batch{border:2px solid #6f9de0;background:#f8fbff}.large-batch-warning{margin:14px 0;padding:14px;border-radius:11px;background:#edf4ff;color:#174f96;border:1px solid #b7cff3;font-weight:700;line-height:1.5}.large-progress{margin:14px 0}.large-progress-track{height:12px;border-radius:999px;background:#dde5ef;overflow:hidden}.large-progress-fill{height:100%;background:#188754;border-radius:999px;transition:width .2s}.large-progress-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.large-progress-meta>div{background:#fff;border:1px solid #dce5f1;border-radius:9px;padding:9px;text-align:center}.large-progress-meta strong{display:block;font-size:16px}.large-progress-meta span{font-size:10px;color:var(--muted);font-weight:800;text-transform:uppercase}.delete-x{width:30px;height:30px;min-height:30px;padding:0;border-radius:8px;border:1px solid #f1b9c4;background:#fff5f6;color:#b4233b;font-size:18px;line-height:1;font-weight:900;cursor:pointer;vertical-align:middle}.delete-x:hover{background:#ffe2e7}.btn-edit{background:#eef2f6;color:#344054}.btn-complement{background:#eaf7f0;color:#11673b;border:1px solid #b9dec9}.change-summary{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;margin:14px 0}.change-summary>div{padding:12px;border:1px solid var(--border);border-radius:10px;background:#f8fafc}.change-summary .arrow{border:0;background:transparent;text-align:center;font-size:22px;font-weight:900;color:var(--muted);padding:0}.change-summary strong{display:block;font-size:19px;margin-top:4px}.complement-box{padding:14px;border-radius:11px;background:#eef8f2;border:1px solid #bee0cb;color:#145c36;margin-bottom:15px;line-height:1.5}.edit-warning{padding:12px 14px;border-radius:10px;background:#fff8e8;border:1px solid #efd99c;color:#755300;margin-bottom:15px;line-height:1.45}.existing-photo{min-height:90px;display:grid;place-items:center;text-align:center;border:2px solid #70ad89;border-radius:12px;background:#f1faf5;color:#17633a;font-weight:900;padding:12px}.large-box-weight.done{border-color:#8dc4a3;background:#f3faf6}.large-batch-actions{display:flex;gap:8px;flex-wrap:wrap}.delivery-date{font-weight:800;color:#174f96}
 .stats-four{grid-template-columns:repeat(4,1fr)}
 .operational-kicker{display:inline-flex;align-items:center;gap:6px;padding:5px 9px;border-radius:999px;background:#edf4ff;color:#174f96;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px}
 .operation-section{margin-top:18px}
@@ -99,7 +99,7 @@ const SUPABASE_URL='https://wbnanxdkgymzlxytwocw.supabase.co';
 const SUPABASE_PUBLISHABLE_KEY='sb_publishable_GeaO5oAEMpWi3ZpySVRUPg_8Wh5rVW2';
 const SITE_URL='https://meggsfaturamento.netlify.app';
 const sb=supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
-const $=id=>document.getElementById(id);let profile=null,allOrders=[],currentOrder=null,photoFiles={},importRows=[],billingPageNumber=1,scalePageNumber=1,ordersChannel=null,booting=false,largeBatchExistingPhotos=new Set();const PAGE_SIZE=10;
+const $=id=>document.getElementById(id);let profile=null,allOrders=[],currentOrder=null,photoFiles={},importRows=[],billingPageNumber=1,scalePageNumber=1,ordersChannel=null,booting=false,largeBatchExistingPhotos=new Set(),normalExistingPhotos=new Set();const PAGE_SIZE=10;
 const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
 const date=v=>v?new Intl.DateTimeFormat('pt-BR',{dateStyle:'short',timeStyle:'short'}).format(new Date(v)):'—';
 const dateOnly=v=>{if(!v)return'—';const p=String(v).slice(0,10).split('-');return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:String(v)};
@@ -182,7 +182,7 @@ const badge=(s,postponedUntil=null,overdue=false,o=null)=>`<span class="badge ${
   s==='grande_lote'?`GRANDE LOTE — ${largeBatchProgress(o).done}/${largeBatchProgress(o).total}`:
   s==='adiado'?(overdue?`ADIAMENTO VENCIDO — ${dateOnly(postponedUntil)}`:`ADIADO ATÉ ${dateOnly(postponedUntil)}`):
   s==='pesagem_cancelada'?'PESAGEM CANCELADA / BLOQUEADA':'Concluído'
-}</span>`;function alertBox(target,msg,type='success',time=5000){target.innerHTML=`<div class="alert alert-${type}">${esc(msg)}</div>`;if(time)setTimeout(()=>target.innerHTML='',time)}function openModal(){$('modalBg').classList.remove('hidden')}function closeModal(){$('modalBg').classList.add('hidden');$('modalContent').innerHTML='';currentOrder=null;largeBatchExistingPhotos=new Set();sackFile=null;scaleFile=null}$('closeModal').onclick=closeModal;$('modalBg').onclick=e=>{if(e.target===$('modalBg'))closeModal()};
+}</span>`;function alertBox(target,msg,type='success',time=5000){target.innerHTML=`<div class="alert alert-${type}">${esc(msg)}</div>`;if(time)setTimeout(()=>target.innerHTML='',time)}function openModal(){$('modalBg').classList.remove('hidden')}function closeModal(){$('modalBg').classList.add('hidden');$('modalContent').innerHTML='';currentOrder=null;largeBatchExistingPhotos=new Set();normalExistingPhotos=new Set();sackFile=null;scaleFile=null}$('closeModal').onclick=closeModal;$('modalBg').onclick=e=>{if(e.target===$('modalBg'))closeModal()};
 async function loadProfile(){const {data:{user}}=await sb.auth.getUser();if(!user)return null;const {data,error}=await sb.from('profiles').select('*').eq('id',user.id).single();if(error)throw error;if(!data.active){await sb.auth.signOut();throw new Error('Esta conta está desativada.')}return {...data,email:user.email}}
 async function boot(){if(booting)return;booting=true;try{const {data:{session}}=await sb.auth.getSession();if(!session){showLogin();return}profile=await loadProfile();showApp();await loadOrders();await subscribeOrders();if(profile.role==='admin')await renderAdmin()}catch(e){showLogin();alertBox($('loginAlert'),e.message,'error')}finally{booting=false}}
 function showLogin(){$('loginPage').classList.remove('hidden');$('appPage').classList.add('hidden')}function showApp(){$('loginPage').classList.add('hidden');$('appPage').classList.remove('hidden');$('userName').textContent=profile.name;$('userRole').textContent=roleText(profile.role);$('billingPage').classList.toggle('hidden',!['admin','faturamento','gerencia'].includes(profile.role));$('scalePage').classList.toggle('hidden',!['admin','balanca'].includes(profile.role));$('adminPage').classList.toggle('hidden',profile.role!=='admin')}
@@ -223,6 +223,13 @@ function superfrioCount(o){
 }
 function meggsStockCount(o){return Number(o.meggs_stock_boxes||0)}
 function pendingBoxCount(o){return Math.max(0,Number(o.boxes_quantity||0)-superfrioCount(o)-meggsStockCount(o))}
+function statusAfterQuantityIncrease(o){
+  if(o.status==='grande_lote'||o.is_large_batch)return'grande_lote';
+  if(['adiado','pesagem_cancelada','falta_substituicao'].includes(o.status))return o.status;
+  return'aguardando_pesagem';
+}
+function quantityLabel(o){return `${Number(o.boxes_quantity||0)} ${esc(o.unit||'CX')}`}
+
 
 function renderBillingList(){
   const q=$('billingSearch').value.trim().toLowerCase();
@@ -248,6 +255,8 @@ function renderBillingList(){
       <td>${o.is_large_batch&&o.large_batch_delivery_date?`<span class="delivery-date">${dateOnly(o.large_batch_delivery_date)}</span>`:'—'}</td>
       <td>${badge(o.status,o.postponed_until,overdue,o)}</td>
       <td>
+        <button class="btn btn-edit btn-small" onclick="openEditOrder('${o.id}')">Editar</button>
+        <button class="btn btn-complement btn-small" onclick="openComplementOrder('${o.id}')">+ Complemento</button>
         ${canLargeBatch?`<button class="btn btn-outline btn-small" onclick="openLargeBatch('${o.id}')">${o.status==='grande_lote'?'Alterar grande lote':'Grande lote'}</button> `:''}
         ${o.status==='aguardando_fotos'?`<button class="btn btn-primary btn-small" onclick="openWeightAdjustment('${o.id}')">Ajustar pesagem</button> <button class="btn btn-muted btn-small" onclick="openPostpone('${o.id}')">Adiar</button> `:''}
         ${o.status==='adiado'?`<button class="btn btn-success btn-small" onclick="resumePostponedOrder('${o.id}')">Retomar</button> `:''}
@@ -414,6 +423,116 @@ function detailsHtml(o){
 }
 
 
+
+
+window.openEditOrder=id=>{
+  if(!['admin','faturamento','gerencia'].includes(profile.role))return;
+  const o=allOrders.find(x=>x.id===id);if(!o)return;
+  currentOrder=o;
+  $('modalTitle').textContent=`Editar pedido ${o.order_number} — Item ${o.item_number}`;
+  $('modalContent').innerHTML=`${detailsHtml(o)}
+    <div class="edit-warning"><strong>Edição = correção.</strong> Use esta opção somente quando algum dado foi lançado errado. Se o vendedor pediu quantidade a mais, use <strong>+ Complemento</strong>.</div>
+    <div class="grid-two">
+      <div class="form-group"><label>Pedido</label><input id="editOrderNumber" class="control" value="${esc(o.order_number)}" required></div>
+      <div class="form-group"><label>Item</label><input id="editItemNumber" class="control" value="${esc(o.item_number)}" required></div>
+    </div>
+    <div class="form-group"><label>Descrição</label><input id="editDescription" class="control" value="${esc(o.description||'')}" required></div>
+    <div class="grid-two">
+      <div class="form-group"><label>Quantidade</label><input id="editQuantity" class="control" type="number" min="1" step="1" value="${o.boxes_quantity}" required></div>
+      <div class="form-group"><label>Unidade</label><input id="editUnit" class="control" value="${esc(o.unit||'CX')}" required></div>
+    </div>
+    <div class="form-group"><label>Observação do pedido</label><textarea id="editObservation" class="control">${esc(o.observation||'')}</textarea></div>
+    <div class="form-group"><label>Motivo da correção</label><textarea id="editReason" class="control" placeholder="Ex.: quantidade digitada incorretamente na planilha" required></textarea></div>
+    <button id="saveOrderEdit" class="btn btn-primary btn-block" type="button">Salvar correção e avisar Superfrio</button>`;
+  $('saveOrderEdit').onclick=saveOrderEdit;openModal();
+};
+
+async function saveOrderEdit(){
+  const o=currentOrder;if(!o)return;
+  const orderNumber=$('editOrderNumber')?.value.trim()||'';
+  const itemNumber=$('editItemNumber')?.value.trim()||'';
+  const description=$('editDescription')?.value.trim()||'';
+  const qty=Math.floor(Number($('editQuantity')?.value||0));
+  const unit=$('editUnit')?.value.trim().toUpperCase()||'';
+  const observation=$('editObservation')?.value.trim()||null;
+  const reason=$('editReason')?.value.trim()||'';
+  if(!orderNumber||!itemNumber||!description||!unit||!Number.isInteger(qty)||qty<1)return alertBox($('globalAlert'),'Preencha Pedido, Item, Descrição, Quantidade e Unidade corretamente.','error');
+  if(!reason)return alertBox($('globalAlert'),'Informe o motivo da correção para a Superfrio saber o que mudou.','error');
+
+  const {data:photoRows,error:photoError}=await sb.from('order_photos').select('box_number').eq('order_id',o.id);
+  if(photoError)return alertBox($('globalAlert'),`Não foi possível validar as fotos existentes: ${photoError.message}`,'error',9000);
+  const maxPhotoBox=(photoRows||[]).reduce((m,p)=>Math.max(m,Number(p.box_number||0)),0);
+  const weightsCount=Array.isArray(o.box_weights)?o.box_weights.filter(v=>Number(v)>0).length:0;
+  const allocated=superfrioCount(o)+meggsStockCount(o);
+  const minimum=Math.max(maxPhotoBox,weightsCount,allocated);
+  if(qty<minimum)return alertBox($('globalAlert'),`Não é possível reduzir para ${qty}. Este pedido já possui ${minimum} unidade(s) vinculada(s) a pesos, fotos ou Produção - Meggs.`,'error',10000);
+
+  const previous={
+    previous_order_number:o.order_number,previous_item_number:o.item_number,previous_description:o.description,
+    previous_boxes_quantity:o.boxes_quantity,previous_unit:o.unit,previous_observation:o.observation
+  };
+  const quantityIncreased=qty>Number(o.boxes_quantity||0);
+  const changed=orderNumber!==String(o.order_number)||itemNumber!==String(o.item_number)||description!==String(o.description||'')||qty!==Number(o.boxes_quantity)||unit!==String(o.unit||'')||(observation||null)!==(o.observation||null);
+  if(!changed)return alertBox($('globalAlert'),'Nenhuma informação foi alterada.','error');
+  const nextStatus=quantityIncreased?statusAfterQuantityIncrease(o):o.status;
+  const now=new Date().toISOString();
+  const update={order_number:orderNumber,item_number:itemNumber,description,boxes_quantity:qty,unit,observation,status:nextStatus,updated_at:now};
+  if(quantityIncreased){
+    update.completed_at=null;
+    update.operation_completed_at=null;
+    update.weight_adjustment_reason=`CORREÇÃO DE QUANTIDADE: ${o.boxes_quantity} → ${qty} ${unit}. ${reason}`;
+    update.weight_adjustment_requested_by=profile.id;
+    update.weight_adjustment_requested_by_name=profile.name;
+    update.weight_adjustment_requested_at=now;
+  }
+  const {data:updated,error}=await sb.from('orders').update(update).eq('id',o.id).select('*').single();
+  if(error)return alertBox($('globalAlert'),error.code==='23505'?'Já existe outro registro com esse Pedido + Item.':`Não foi possível editar: ${error.message}`,'error',10000);
+  closeModal();await loadOrders();
+  const emailResult=await notifyByEmail('order_edited',{...updated,...previous,edit_reason:reason,responsible_name:profile.name});
+  alertBox($('globalAlert'),emailResult.ok?'Pedido corrigido e Superfrio avisada por e-mail.':`Pedido corrigido, mas o e-mail falhou: ${emailResult.error}`,emailResult.ok?'success':'error',10000);
+}
+
+window.openComplementOrder=id=>{
+  if(!['admin','faturamento','gerencia'].includes(profile.role))return;
+  const o=allOrders.find(x=>x.id===id);if(!o)return;
+  currentOrder=o;
+  $('modalTitle').textContent=`Complementar pedido ${o.order_number} — Item ${o.item_number}`;
+  $('modalContent').innerHTML=`${detailsHtml(o)}
+    <div class="complement-box"><strong>Complemento soma ao pedido atual.</strong><br>Não será criado outro Pedido/Item. O progresso que a Superfrio já fez continua salvo.</div>
+    <div class="change-summary"><div><span class="label">Quantidade atual</span><strong>${quantityLabel(o)}</strong></div><div class="arrow">+</div><div><span class="label">Novo total</span><strong id="complementNewTotal">${quantityLabel(o)}</strong></div></div>
+    <div class="form-group"><label>Quantidade a acrescentar (${esc(o.unit||'CX')})</label><input id="complementQuantity" class="control" type="number" min="1" step="1" placeholder="Ex.: 20" required></div>
+    <div class="form-group"><label>Motivo / observação do complemento</label><textarea id="complementReason" class="control">Complemento solicitado pelo vendedor</textarea></div>
+    <button id="saveComplement" class="btn btn-success btn-block" type="button">Adicionar complemento e avisar Superfrio</button>`;
+  $('complementQuantity').oninput=()=>{const add=Math.max(0,Math.floor(Number($('complementQuantity').value||0)));$('complementNewTotal').textContent=`${Number(o.boxes_quantity||0)+add} ${o.unit||'CX'}`};
+  $('saveComplement').onclick=saveComplement;openModal();
+};
+
+async function saveComplement(){
+  const o=currentOrder;if(!o)return;
+  const add=Math.floor(Number($('complementQuantity')?.value||0));
+  const reason=$('complementReason')?.value.trim()||'Complemento solicitado pelo vendedor';
+  if(!Number.isInteger(add)||add<1)return alertBox($('globalAlert'),'Informe uma quantidade válida para o complemento.','error');
+  const previousQty=Number(o.boxes_quantity||0),newQty=previousQty+add,now=new Date().toISOString();
+  const nextStatus=statusAfterQuantityIncrease(o);
+  const update={boxes_quantity:newQty,status:nextStatus,updated_at:now};
+  if(!['adiado','pesagem_cancelada','falta_substituicao'].includes(nextStatus)){
+    update.completed_at=null;
+    update.operation_completed_at=null;
+  }
+  if(nextStatus!=='grande_lote'){
+    update.weight_adjustment_reason=`COMPLEMENTO: +${add} ${o.unit||'CX'} — novo total ${newQty} ${o.unit||'CX'}. ${reason}`;
+    update.weight_adjustment_requested_by=profile.id;
+    update.weight_adjustment_requested_by_name=profile.name;
+    update.weight_adjustment_requested_at=now;
+  }
+  const {data:updated,error}=await sb.from('orders').update(update).eq('id',o.id).select('*').single();
+  if(error)return alertBox($('globalAlert'),`Não foi possível lançar o complemento: ${error.message}`,'error',10000);
+  closeModal();await loadOrders();
+  const emailResult=await notifyByEmail('order_complemented',{...updated,complement_added:add,complement_previous_quantity:previousQty,complement_reason:reason,responsible_name:profile.name});
+  const blocked=['adiado','pesagem_cancelada','falta_substituicao'].includes(nextStatus);
+  const msg=`Complemento de +${add} ${o.unit||'CX'} lançado. Total: ${newQty} ${o.unit||'CX'}.${blocked?' O pedido permanece bloqueado no status atual.':' A Superfrio já pode processar a quantidade complementar.'}`;
+  alertBox($('globalAlert'),emailResult.ok?`${msg} Superfrio avisada por e-mail.`:`${msg} O e-mail falhou: ${emailResult.error}`,emailResult.ok?'success':'error',11000);
+}
 
 window.openLargeBatch=id=>{
   if(!['admin','faturamento','gerencia'].includes(profile.role))return;
@@ -663,11 +782,12 @@ async function savePostponement(){
 window.resumePostponedOrder=async id=>{
   if(!['admin','faturamento','gerencia'].includes(profile.role))return;
   const o=allOrders.find(x=>x.id===id);if(!o||o.status!=='adiado')return;
-  const confirmed=confirm(`Retomar o pedido ${o.order_number}, item ${o.item_number}?\n\nEle voltará para Aguardando fotos e aparecerá novamente na fila ativa da Superfrio.`);
+  const needsWeight=!!o.weight_adjustment_reason;
+  const confirmed=confirm(`Retomar o pedido ${o.order_number}, item ${o.item_number}?\n\nEle voltará para ${needsWeight?'Aguardando pesagem':'Aguardando fotos'} e aparecerá novamente na fila ativa da Superfrio.`);
   if(!confirmed)return;
   const now=new Date().toISOString();
   const {data:resumedOrder,error}=await sb.from('orders').update({
-    status:'aguardando_fotos',
+    status:needsWeight?'aguardando_pesagem':'aguardando_fotos',
     resumed_by:profile.id,
     resumed_by_name:profile.name,
     resumed_at:now,
@@ -676,7 +796,7 @@ window.resumePostponedOrder=async id=>{
   if(error)return alertBox($('globalAlert'),`Não foi possível retomar o pedido: ${error.message}`,'error',9000);
   await loadOrders();
   const emailResult=await notifyByEmail('order_resumed',{...resumedOrder,responsible_name:profile.name});
-  const message=`Pedido ${o.order_number} retomado e liberado novamente para fotos.`;
+  const message=`Pedido ${o.order_number} retomado e liberado novamente para ${needsWeight?'pesagem':'fotos'}.`;
   alertBox($('globalAlert'),emailResult.ok?`${message} Equipe operacional avisada por e-mail.`:`${message} O e-mail não pôde ser enviado: ${emailResult.error}`,emailResult.ok?'success':'error',10000);
 };
 
@@ -758,7 +878,8 @@ async function saveLargeBatchPhotos(){
 window.openWeights=id=>{
   const o=allOrders.find(x=>x.id===id);if(!o||o.status!=='aguardando_pesagem')return;
   currentOrder=o;
-  const defaultQty=superfrioCount(o)>0?superfrioCount(o):o.boxes_quantity;
+  const stock=meggsStockCount(o),maxAvailable=Math.max(1,Number(o.boxes_quantity||0)-stock),alreadySf=superfrioCount(o);
+  const defaultQty=o.weight_adjustment_reason?Math.max(alreadySf,maxAvailable):(alreadySf>0?alreadySf:maxAvailable);
   $('modalTitle').textContent=`Pesagem — Pedido ${o.order_number}, Item ${o.item_number}`;
   $('modalContent').innerHTML=`${detailsHtml(o)}
     ${o.weight_adjustment_reason?`<div class="adjustment-warning">Solicitação do Faturamento: ${esc(o.weight_adjustment_reason)}</div>`:''}
@@ -766,8 +887,8 @@ window.openWeights=id=>{
       Informe quantas caixas realmente estão disponíveis na Superfrio. Se já existirem pesos, eles aparecem preenchidos para revisão/complemento.
     </div>
     <div class="form-group">
-      <label>Caixas disponíveis na Superfrio (de ${o.boxes_quantity})</label>
-      <input id="availableBoxes" class="control" type="number" min="1" max="${o.boxes_quantity}" value="${defaultQty}">
+      <label>Caixas disponíveis na Superfrio (máximo ${maxAvailable}${stock?` — ${stock} já vinculada(s) à Produção - Meggs`:``})</label>
+      <input id="availableBoxes" class="control" type="number" min="1" max="${maxAvailable}" value="${defaultQty}">
     </div>
     <div id="weightsContainer"></div>
     <div class="total"><span>Peso total das caixas disponíveis</span><strong id="weightTotal">0,000 kg</strong></div>
@@ -785,7 +906,8 @@ window.openWeights=id=>{
 function renderAvailableWeightInputs(){
   if(!currentOrder)return;
   let qty=Math.floor(Number($('availableBoxes')?.value||0));
-  qty=Math.max(1,Math.min(Number(currentOrder.boxes_quantity),qty||1));
+  const maxAvailable=Math.max(1,Number(currentOrder.boxes_quantity||0)-meggsStockCount(currentOrder));
+  qty=Math.max(1,Math.min(maxAvailable,qty||1));
   $('availableBoxes').value=qty;
   const existing=Array.isArray(currentOrder.box_weights)?currentOrder.box_weights:[];
   $('weightsContainer').innerHTML=`<div class="weights">${Array.from({length:qty},(_,i)=>`<div class="weight-box"><label>Caixa ${i+1}</label><input class="control weight-input" type="number" min="0.001" step="0.001" value="${existing[i]??''}"></div>`).join('')}</div>`;
@@ -830,8 +952,9 @@ async function markItemMissing(){
 async function saveWeights(){
   const orderSnapshot=currentOrder;if(!orderSnapshot)return;
   const available=Math.floor(Number($('availableBoxes')?.value||0));
-  if(!Number.isInteger(available)||available<1||available>orderSnapshot.boxes_quantity)
-    return alertBox($('globalAlert'),'Informe uma quantidade válida de caixas disponíveis.','error');
+  const maxAvailable=Math.max(1,Number(orderSnapshot.boxes_quantity||0)-meggsStockCount(orderSnapshot));
+  if(!Number.isInteger(available)||available<1||available>maxAvailable)
+    return alertBox($('globalAlert'),`Informe uma quantidade válida para a Superfrio (máximo ${maxAvailable}).`,'error');
 
   const values=[...document.querySelectorAll('.weight-input')].map(i=>Number(i.value));
   if(values.length!==available||values.some(v=>!Number.isFinite(v)||v<=0))
@@ -846,7 +969,7 @@ async function saveWeights(){
     box_weights:values,
     total_weight:total,
     superfrio_boxes:available,
-    meggs_stock_boxes:0,
+    meggs_stock_boxes:meggsStockCount(orderSnapshot),
     status:'aguardando_fotos',
     weighed_by:profile.id,
     weighed_at:weighedAt,
@@ -879,119 +1002,58 @@ async function saveWeights(){
     9000
   );
 }
-window.openPhotos=id=>{
+window.openPhotos=async id=>{
   const o=allOrders.find(x=>x.id===id);if(!o)return;
-  currentOrder=o;photoFiles={};
+  currentOrder=o;photoFiles={};normalExistingPhotos=new Set();
   const qty=superfrioCount(o);
   if(!qty)return alertBox($('globalAlert'),'Este pedido ainda não possui quantidade processada na Superfrio.','error');
-  const missing=Math.max(0,o.boxes_quantity-qty);
   $('modalTitle').textContent=`Fotos — Pedido ${o.order_number}, Item ${o.item_number}`;
-  $('modalContent').innerHTML=`${detailsHtml(o)}
-    <div class="alert alert-info">
-      Foram registradas <strong>${qty} caixa(s) disponíveis na Superfrio</strong>. Anexe uma foto da sacaria e uma da balança somente para essas caixas.
-      ${missing?` Depois das fotos, o Faturamento receberá o item como parcial e poderá lançar as <strong>${missing} caixa(s) restantes</strong> como Produção - Meggs.`:''}
-    </div>
-    <div class="photo-progress">
-      <div><span class="label">Fotos da sacaria</span><strong id="sackProgress">0 de ${qty}</strong></div>
-      <div><span class="label">Fotos da balança</span><strong id="scaleProgress">0 de ${qty}</strong></div>
-    </div>
-    <div>${Array.from({length:qty},(_,i)=>photoBoxHtml(i+1)).join('')}</div>
-    <button id="savePhotos" class="btn btn-success btn-block" style="margin-top:16px" disabled>
-      Salvar ${qty*2} fotos ${missing?'e enviar parcial ao Faturamento':'e concluir'}
-    </button>`;
-  bindPhotoInputs();updatePhotoProgress();$('savePhotos').onclick=savePhotos;openModal();
+  $('modalContent').innerHTML='<div class="spinner"></div>';openModal();
+  try{
+    const {data:rows,error}=await sb.from('order_photos').select('box_number,photo_type').eq('order_id',o.id);
+    if(error)throw error;
+    (rows||[]).forEach(p=>normalExistingPhotos.add(`${p.box_number}-${p.photo_type}`));
+    const stock=meggsStockCount(o),remaining=Math.max(0,o.boxes_quantity-qty-stock);
+    $('modalContent').innerHTML=`${detailsHtml(o)}
+      <div class="alert alert-info">Foram registradas <strong>${qty} unidade(s) na Superfrio</strong>. Fotos já salvas aparecem marcadas e não precisam ser reenviadas.${remaining?` Após concluir, ainda restarão <strong>${remaining}</strong> unidade(s) pendentes.`:''}</div>
+      <div class="photo-progress"><div><span class="label">Fotos da sacaria</span><strong id="sackProgress">0 de ${qty}</strong></div><div><span class="label">Fotos da balança</span><strong id="scaleProgress">0 de ${qty}</strong></div></div>
+      <div>${Array.from({length:qty},(_,i)=>photoBoxHtml(i+1)).join('')}</div>
+      <button id="savePhotos" class="btn btn-success btn-block" style="margin-top:16px" disabled>Salvar fotos</button>`;
+    bindPhotoInputs();updatePhotoProgress();$('savePhotos').onclick=savePhotos;
+  }catch(e){$('modalContent').innerHTML=`<div class="alert alert-error">${esc(e.message)}</div>`}
 };
-function photoBoxHtml(box){return `<section class="box-photo-card"><h4>Caixa ${box}</h4><div class="photo-pair">${photoSlotHtml(box,'sacaria','Foto da sacaria','Fotografe a identificação/peso do saco.')}${photoSlotHtml(box,'balanca','Foto da balança','O visor e o peso devem aparecer claramente.')}</div></section>`}
+function photoBoxHtml(box){return `<section class="box-photo-card"><h4>Caixa ${box}</h4><div class="photo-pair">${normalPhotoSlotHtml(box,'sacaria','Foto da sacaria','Fotografe a identificação/peso do saco.')}${normalPhotoSlotHtml(box,'balanca','Foto da balança','O visor e o peso devem aparecer claramente.')}</div></section>`}
+function normalPhotoSlotHtml(box,type,title,help){const key=`${box}-${type}`;if(normalExistingPhotos.has(key))return `<div class="existing-photo">✓ ${title}<br><small>Já salva</small></div>`;return photoSlotHtml(box,type,title,help)}
 function photoSlotHtml(box,type,title,help){const key=`${box}-${type}`;return `<div id="slot-${key}" class="photo-slot"><h5>${title}</h5><p>${help}</p><div class="photo-buttons"><label class="photo-button photo-camera" for="camera-${key}">📷 Tirar foto</label><label class="photo-button photo-gallery" for="gallery-${key}">🖼️ Galeria</label></div><input id="camera-${key}" class="file-input photo-input" data-box="${box}" data-type="${type}" type="file" accept="image/*" capture="environment"><input id="gallery-${key}" class="file-input photo-input" data-box="${box}" data-type="${type}" type="file" accept="image/*"><div id="wrap-${key}" class="photo-preview-wrap"><img id="preview-${key}" class="preview" alt="Prévia ${title}"><button type="button" class="remove-photo" data-key="${key}" aria-label="Remover foto">×</button></div></div>`}
 function bindPhotoInputs(){document.querySelectorAll('.photo-input').forEach(input=>input.onchange=e=>{const file=e.target.files?.[0];if(!file)return;const key=`${e.target.dataset.box}-${e.target.dataset.type}`;setPhotoFile(key,file)});document.querySelectorAll('.remove-photo').forEach(btn=>btn.onclick=()=>removePhotoFile(btn.dataset.key))}
 function setPhotoFile(key,file){if(!file.type.startsWith('image/'))return alertBox($('globalAlert'),'Selecione apenas arquivos de imagem.','error');photoFiles[key]=file;const img=$(`preview-${key}`),wrap=$(`wrap-${key}`),slot=$(`slot-${key}`);if(img.dataset.url)URL.revokeObjectURL(img.dataset.url);const url=URL.createObjectURL(file);img.src=url;img.dataset.url=url;img.classList.add('visible');wrap.classList.add('has-photo');slot.classList.add('complete');currentOrder?.status==='grande_lote'?updateLargeBatchPhotoProgress():updatePhotoProgress()}
 function removePhotoFile(key){delete photoFiles[key];const img=$(`preview-${key}`),wrap=$(`wrap-${key}`),slot=$(`slot-${key}`);if(img?.dataset.url)URL.revokeObjectURL(img.dataset.url);if(img){img.removeAttribute('src');delete img.dataset.url;img.classList.remove('visible')}wrap?.classList.remove('has-photo');slot?.classList.remove('complete');document.querySelectorAll(`.photo-input[data-box="${key.split('-')[0]}"][data-type="${key.split('-')[1]}"]`).forEach(i=>i.value='');currentOrder?.status==='grande_lote'?updateLargeBatchPhotoProgress():updatePhotoProgress()}
 function updatePhotoProgress(){
-  if(!currentOrder)return;
-  const qty=superfrioCount(currentOrder);
-  let sacks=0,scales=0;
-  for(let box=1;box<=qty;box++){
-    if(photoFiles[`${box}-sacaria`])sacks++;
-    if(photoFiles[`${box}-balanca`])scales++;
-  }
-  if($('sackProgress'))$('sackProgress').textContent=`${sacks} de ${qty}`;
-  if($('scaleProgress'))$('scaleProgress').textContent=`${scales} de ${qty}`;
-  if($('savePhotos'))$('savePhotos').disabled=sacks!==qty||scales!==qty;
+  if(!currentOrder)return;const qty=superfrioCount(currentOrder);let sacks=0,scales=0;
+  for(let box=1;box<=qty;box++){if(normalExistingPhotos.has(`${box}-sacaria`)||photoFiles[`${box}-sacaria`])sacks++;if(normalExistingPhotos.has(`${box}-balanca`)||photoFiles[`${box}-balanca`])scales++}
+  if($('sackProgress'))$('sackProgress').textContent=`${sacks} de ${qty}`;if($('scaleProgress'))$('scaleProgress').textContent=`${scales} de ${qty}`;
+  const complete=sacks===qty&&scales===qty,newFiles=Object.keys(photoFiles).length;
+  if($('savePhotos')){$('savePhotos').disabled=!complete||(!newFiles&&normalExistingPhotos.size===0);$('savePhotos').textContent=complete?(newFiles?`Salvar ${newFiles} nova(s) foto(s) e continuar`:'Confirmar fotos já existentes'):'Complete as fotos pendentes'}
 }
 async function uploadPhoto(file,box,kind){const ext=(file.name.split('.').pop()||'jpg').replace(/[^a-zA-Z0-9]/g,'').toLowerCase()||'jpg';const safeOrder=String(currentOrder.order_number).replace(/[^a-zA-Z0-9_-]/g,'_'),safeItem=String(currentOrder.item_number).replace(/[^a-zA-Z0-9_-]/g,'_');const path=`${safeOrder}/${safeItem}/caixa_${box}/${kind}_${Date.now()}_${crypto.randomUUID()}.${ext}`;const {error}=await sb.storage.from('pedido-fotos').upload(path,file,{upsert:false,contentType:file.type||'image/jpeg'});if(error)throw error;return path}
 async function savePhotos(){
-  const orderSnapshot=currentOrder;
-  if(!orderSnapshot)return;
-
-  const qty=superfrioCount(orderSnapshot);
-  const expected=qty*2;
-  if(Object.keys(photoFiles).length!==expected)
-    return alertBox($('globalAlert'),`Faltam fotos. É necessário anexar ${expected} imagens para as ${qty} caixa(s) disponíveis.`, 'error');
-
-  const btn=$('savePhotos');
-  btn.disabled=true;
-  btn.textContent='Enviando fotos...';
-
-  const uploaded=[];
-  let photoRowsInserted=false;
+  const o=currentOrder;if(!o)return;const qty=superfrioCount(o);
+  let sacks=0,scales=0;for(let box=1;box<=qty;box++){if(normalExistingPhotos.has(`${box}-sacaria`)||photoFiles[`${box}-sacaria`])sacks++;if(normalExistingPhotos.has(`${box}-balanca`)||photoFiles[`${box}-balanca`])scales++}
+  if(sacks!==qty||scales!==qty)return alertBox($('globalAlert'),'Ainda existem fotos pendentes.','error');
+  const btn=$('savePhotos');btn.disabled=true;btn.textContent='Salvando fotos...';const uploaded=[];let inserted=false;
   try{
-    for(let box=1;box<=qty;box++){
-      for(const type of ['sacaria','balanca']){
-        const path=await uploadPhoto(photoFiles[`${box}-${type}`],box,type);
-        uploaded.push({order_id:orderSnapshot.id,box_number:box,photo_type:type,storage_path:path,uploaded_by:profile.id});
-      }
-    }
-
-    const {error:photoError}=await sb.from('order_photos').insert(uploaded);
-    if(photoError)throw photoError;
-    photoRowsInserted=true;
-
-    const now=new Date().toISOString();
-    const isPartial=qty<orderSnapshot.boxes_quantity;
-    const nextStatus=isPartial?'parcial_aguardando_faturamento':'concluido';
-
-    const {data:completedOrder,error}=await sb.from('orders').update({
-      status:nextStatus,
-      photographed_by:profile.id,
-      operation_completed_at:now,
-      completed_at:isPartial?null:now,
-      updated_at:now
-    }).eq('id',orderSnapshot.id).select('*').single();
-    if(error)throw error;
-
-    // Atualiza a tela antes do aviso por e-mail.
-    closeModal();
-    await loadOrders();
-
-    const emailType=isPartial?'partial_ready':'order_completed';
-    const emailResult=await notifyByEmail(emailType,{
-      ...completedOrder,
-      sack_photos_count:qty,
-      scale_photos_count:qty,
-      responsible_name:profile.name
-    });
-
-    const remaining=orderSnapshot.boxes_quantity-qty;
-    const okMessage=isPartial
-      ? `${expected} fotos salvas. Superfrio concluiu ${qty} de ${orderSnapshot.boxes_quantity} caixa(s). O Faturamento deve lançar as ${remaining} caixa(s) restantes como Produção - Meggs.`
-      : `${expected} fotos salvas. Pedido concluído e Faturamento avisado por e-mail.`;
-
-    alertBox(
-      $('globalAlert'),
-      emailResult.ok?okMessage:`${okMessage} O e-mail não pôde ser enviado: ${emailResult.error}`,
-      emailResult.ok?'success':'error',
-      10000
-    );
+    for(const [key,file] of Object.entries(photoFiles)){if(normalExistingPhotos.has(key))continue;const [boxText,type]=key.split('-'),box=Number(boxText);const path=await uploadPhoto(file,box,type);uploaded.push({order_id:o.id,box_number:box,photo_type:type,storage_path:path,uploaded_by:profile.id})}
+    if(uploaded.length){const {error:insertError}=await sb.from('order_photos').insert(uploaded);if(insertError)throw insertError;inserted=true}
+    const stock=meggsStockCount(o),remaining=Math.max(0,Number(o.boxes_quantity||0)-qty-stock),now=new Date().toISOString(),nextStatus=remaining>0?'parcial_aguardando_faturamento':'concluido';
+    const {data:updated,error}=await sb.from('orders').update({status:nextStatus,photographed_by:profile.id,operation_completed_at:now,completed_at:remaining>0?null:now,updated_at:now}).eq('id',o.id).select('*').single();if(error)throw error;
+    closeModal();await loadOrders();
+    const emailResult=await notifyByEmail(remaining>0?'partial_ready':'order_completed',{...updated,sack_photos_count:qty,scale_photos_count:qty,responsible_name:profile.name});
+    const msg=remaining>0?`Fotos concluídas para ${qty} unidade(s) da Superfrio. Ainda restam ${remaining} unidade(s) pendentes.`:`Fotos concluídas. Pedido completo novamente.`;
+    alertBox($('globalAlert'),emailResult.ok?`${msg} Faturamento avisado por e-mail.`:`${msg} O e-mail falhou: ${emailResult.error}`,emailResult.ok?'success':'error',10000);
   }catch(e){
-    // Se falhou depois de inserir as linhas, remove as referências e os arquivos para permitir nova tentativa limpa.
-    if(photoRowsInserted){
-      try{await sb.from('order_photos').delete().eq('order_id',orderSnapshot.id).in('storage_path',uploaded.map(x=>x.storage_path))}catch(_){}
-    }
-    if(uploaded.length){
-      try{await sb.storage.from('pedido-fotos').remove(uploaded.map(x=>x.storage_path))}catch(_){}
-    }
-    alertBox($('globalAlert'),`Não foi possível concluir as fotos: ${e.message}`,'error',10000);
-    if(btn){btn.disabled=false;btn.textContent='Tentar novamente'}
+    if(inserted&&uploaded.length){try{await sb.from('order_photos').delete().eq('order_id',o.id).in('storage_path',uploaded.map(x=>x.storage_path))}catch(_){}}
+    if(uploaded.length){try{await sb.storage.from('pedido-fotos').remove(uploaded.map(x=>x.storage_path))}catch(_){}}
+    alertBox($('globalAlert'),`Não foi possível salvar as fotos: ${e.message}`,'error',10000);if(btn){btn.disabled=false;btn.textContent='Tentar novamente'}
   }
 }
 
