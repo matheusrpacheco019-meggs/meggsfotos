@@ -263,6 +263,7 @@ function renderBillingList(){
         ${canCancel?`<button class="btn btn-danger btn-small" onclick="openCancelWeighing('${o.id}')">Cancelar pesagem</button> `:''}
         ${o.status==='pesagem_cancelada'?`<button class="btn btn-success btn-small" onclick="reactivateWeighing('${o.id}')">Reativar pesagem</button> `:''}
         ${o.status==='parcial_aguardando_faturamento'&&pending>0?`<button class="btn btn-success btn-small" onclick="openProductionMeggs('${o.id}')">Lançar Produção - Meggs (${pending})</button> `:''}
+        ${['aguardando_pesagem','aguardando_fotos','grande_lote','parcial_aguardando_faturamento'].includes(o.status)?`<button class="btn btn-success btn-small" onclick="openManualComplete('${o.id}')">Concluir pedido</button> `:''}
         ${canOperationalMessage?`<button class="btn btn-outline btn-small" onclick="openBillingMessage('${o.id}')">Avisar Superfrio</button> `:''}
         <button class="btn btn-outline btn-small" onclick="showDetails('${o.id}')">Ver</button>
         <button class="delete-x" type="button" title="Excluir pedido" aria-label="Excluir pedido" onclick="deleteOrder('${o.id}')">×</button>
@@ -694,6 +695,52 @@ window.reactivateWeighing=async id=>{
   const emailResult=await notifyByEmail('weight_reactivated',{...updated,responsible_name:profile.name});
   alertBox($('globalAlert'),emailResult.ok?(restoreStatus==='grande_lote'?'Grande Lote reativado e Superfrio avisada por e-mail.':'Pesagem reativada e Superfrio avisada por e-mail.'):`Pesagem reativada, mas o e-mail falhou: ${emailResult.error}`,emailResult.ok?'success':'error',10000);
 };
+
+window.openManualComplete=id=>{
+  if(!['admin','faturamento','gerencia'].includes(profile.role))return;
+  const o=allOrders.find(x=>x.id===id);
+  if(!o||!['aguardando_pesagem','aguardando_fotos','grande_lote','parcial_aguardando_faturamento'].includes(o.status))return;
+  currentOrder=o;
+  const sf=superfrioCount(o),stock=meggsStockCount(o),pending=pendingBoxCount(o);
+  $('modalTitle').textContent=`Concluir pedido — ${o.order_number} / Item ${o.item_number}`;
+  $('modalContent').innerHTML=`${detailsHtml(o)}
+    <div class="alert alert-info"><strong>Conclusão manual pelo Faturamento.</strong> Use quando a operação já atingiu o que é necessário para este pedido, mesmo que ainda existam fotos ou caixas pendentes no sistema.</div>
+    <div class="edit-warning">Ao concluir, a Superfrio não poderá continuar lançando pesos/fotos neste item. O que já foi salvo permanece no pedido. <strong>Esta ação não apaga nenhuma foto ou peso.</strong></div>
+    <div class="grid-two">
+      <div><span class="label">Caixas do pedido</span><strong>${Number(o.boxes_quantity||0)}</strong></div>
+      <div><span class="label">Pesos Superfrio</span><strong>${sf}</strong></div>
+      <div><span class="label">Produção - Meggs</span><strong>${stock}</strong></div>
+      <div><span class="label">Saldo pendente calculado</span><strong>${pending}</strong></div>
+    </div>
+    <div class="form-group"><label>Motivo da conclusão manual</label><textarea id="manualCompletionReason" class="control" placeholder="Ex.: peso necessário atingido; fotos restantes dispensadas pelo Faturamento." required></textarea></div>
+    <button id="saveManualComplete" class="btn btn-success btn-block" type="button">Confirmar conclusão e avisar Superfrio</button>`;
+  $('saveManualComplete').onclick=saveManualComplete;
+  openModal();
+};
+
+async function saveManualComplete(){
+  const o=currentOrder;if(!o)return;
+  const reason=$('manualCompletionReason')?.value.trim()||'';
+  if(!reason)return alertBox($('globalAlert'),'Informe o motivo da conclusão manual.','error');
+  if(!confirm(`Confirmar CONCLUSÃO do pedido ${o.order_number}, item ${o.item_number}?\n\nA Superfrio ficará bloqueada para novos pesos/fotos deste item.`))return;
+  const {data:photoRows}=await sb.from('order_photos').select('photo_type').eq('order_id',o.id);
+  const sackPhotos=(photoRows||[]).filter(p=>p.photo_type==='sacaria').length;
+  const scalePhotos=(photoRows||[]).filter(p=>p.photo_type==='balanca').length;
+  const now=new Date().toISOString();
+  const {data:updated,error}=await sb.from('orders').update({
+    status:'concluido',
+    completed_at:now,
+    operation_completed_at:now,
+    responsible_name:profile.name,
+    updated_at:now
+  }).eq('id',o.id).select('*').single();
+  if(error)return alertBox($('globalAlert'),`Não foi possível concluir o pedido: ${error.message}`,'error',10000);
+  const payload={...updated,responsible_name:profile.name,manual_completion:true,completion_reason:reason,previous_status:o.status,sack_photos_count:sackPhotos,scale_photos_count:scalePhotos};
+  closeModal();
+  await loadOrders();
+  const emailResult=await notifyByEmail('billing_completed',payload);
+  alertBox($('globalAlert'),emailResult.ok?`Pedido ${o.order_number} concluído pelo Faturamento e Superfrio avisada por e-mail.`:`Pedido ${o.order_number} concluído, mas o e-mail para a Superfrio falhou: ${emailResult.error}`,emailResult.ok?'success':'error',10000);
+}
 
 window.openBillingMessage=id=>{
   if(!['admin','faturamento','gerencia'].includes(profile.role))return;
