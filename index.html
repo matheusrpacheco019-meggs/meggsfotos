@@ -95,8 +95,8 @@
 </main></section>
 <div id="modalBg" class="modal-bg hidden"><div class="modal"><div class="modal-head"><h3 id="modalTitle"></h3><button id="closeModal" class="btn btn-muted btn-small">Fechar</button></div><div id="modalContent"></div></div></div>
 <script>
-const SUPABASE_URL='https://wbnanxdkgymzlxytwocw.supabase.co';
-const SUPABASE_PUBLISHABLE_KEY='sb_publishable_GeaO5oAEMpWi3ZpySVRUPg_8Wh5rVW2';
+const SUPABASE_URL='https://ohpieaagauihgtoormaa.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY='sb_publishable_OfrQw-y5wYiW68qL293thg_ASeZwM9s';
 const SITE_URL='https://meggsfaturamento.netlify.app';
 const sb=supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
 const $=id=>document.getElementById(id);let profile=null,allOrders=[],currentOrder=null,photoFiles={},importRows=[],billingPageNumber=1,scalePageNumber=1,ordersChannel=null,booting=false,largeBatchExistingPhotos=new Set(),normalExistingPhotos=new Set();const PAGE_SIZE=10;
